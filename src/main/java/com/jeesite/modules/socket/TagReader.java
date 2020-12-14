@@ -9,20 +9,18 @@ import org.springframework.stereotype.Component;
 public class TagReader implements Runnable {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private String hostname = "192.168.1.100";
 
-    private static TagReader instance;
+    public TagReader() {
+    }
 
-    public static TagReader getInstance() {
-        if (instance == null) {
-            instance = new TagReader();
-        }
-        return instance;
+    public TagReader(String hostname) {
+        this.hostname = hostname;
     }
 
     @Override
     public void run() {
         try {
-            String hostname = "192.168.1.100";
 
             ImpinjReader reader = new ImpinjReader();
 
