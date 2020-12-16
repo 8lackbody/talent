@@ -68,5 +68,14 @@ public class ArchivesService extends CrudService<ArchivesDao, Archives> {
 	public void delete(Archives archives) {
 		super.delete(archives);
 	}
+
+	/**
+	 * 根据epc获取名字
+	 * @param epc
+	 * @return
+	 */
+	public String getNameByEpc(String epc) {
+		return super.dao.getNameByEpc(epc);
+	}
 	
 }

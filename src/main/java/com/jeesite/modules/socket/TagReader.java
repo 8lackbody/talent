@@ -10,12 +10,14 @@ public class TagReader implements Runnable {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private String hostname = "192.168.1.100";
+    private Long warehouseId = 123L;
 
     public TagReader() {
     }
 
-    public TagReader(String hostname) {
+    public TagReader(String hostname, Long warehouseId) {
         this.hostname = hostname;
+        this.warehouseId = warehouseId;
     }
 
     @Override
@@ -42,13 +44,14 @@ public class TagReader implements Runnable {
             antennas.getAntenna((short) 1).setTxPowerinDbm(20.0);
             antennas.getAntenna((short) 1).setRxSensitivityinDbm(-70);
 
-            reader.setTagReportListener(new TagReportListenerImplementation());
+            reader.setTagReportListener(new TagReportListenerImplementation(warehouseId));
 
             reader.applySettings(settings);
 
             reader.start();
 
         } catch (OctaneSdkException ex) {
+
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
         }

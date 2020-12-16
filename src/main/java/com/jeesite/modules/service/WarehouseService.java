@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly=true)
 public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
-	
+
 	/**
 	 * 获取单条数据
 	 * @param warehouse
@@ -28,7 +28,7 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
 	public Warehouse get(Warehouse warehouse) {
 		return super.get(warehouse);
 	}
-	
+
 	/**
 	 * 查询分页数据
 	 * @param warehouse 查询条件
@@ -38,7 +38,7 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
 	public Page<Warehouse> findPage(Warehouse warehouse) {
 		return super.findPage(warehouse);
 	}
-	
+
 	/**
 	 * 保存数据（插入或更新）
 	 * @param warehouse
@@ -48,7 +48,7 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
 	public void save(Warehouse warehouse) {
 		super.save(warehouse);
 	}
-	
+
 	/**
 	 * 更新状态
 	 * @param warehouse
@@ -58,7 +58,7 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
 	public void updateStatus(Warehouse warehouse) {
 		super.updateStatus(warehouse);
 	}
-	
+
 	/**
 	 * 删除数据
 	 * @param warehouse
@@ -68,5 +68,13 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
 	public void delete(Warehouse warehouse) {
 		super.delete(warehouse);
 	}
-	
+
+	/**
+	 * 根据安卓ip获取仓库信息
+	 * @param ip
+	 * @return
+	 */
+	public Warehouse findByAndroidIp(String ip) {
+		return super.dao.findByAndroidIp(ip);
+	}
 }

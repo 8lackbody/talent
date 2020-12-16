@@ -6,6 +6,8 @@ package com.jeesite.modules.dao;
 import com.jeesite.common.dao.CrudDao;
 import com.jeesite.common.mybatis.annotation.MyBatisDao;
 import com.jeesite.modules.entity.Warehouse;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * warehouseDAO接口
@@ -14,5 +16,8 @@ import com.jeesite.modules.entity.Warehouse;
  */
 @MyBatisDao
 public interface WarehouseDao extends CrudDao<Warehouse> {
+
+    @Select("SELECT * FROM warehouse WHERE andriod_ip = #{ip}")
+    Warehouse findByAndroidIp(@Param("ip") String ip);
 	
 }

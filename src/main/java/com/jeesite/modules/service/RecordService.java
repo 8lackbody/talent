@@ -10,6 +10,8 @@ import com.jeesite.modules.entity.Record;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * recordService
  * @author zht
@@ -68,5 +70,12 @@ public class RecordService extends CrudService<RecordDao, Record> {
 	public void delete(Record record) {
 		super.delete(record);
 	}
-	
+
+	/**
+	 * 批量插入记录
+	 * @param list
+	 */
+	public void saveList(List<Record> list){
+		super.dao.insertBatch(list);
+	}
 }

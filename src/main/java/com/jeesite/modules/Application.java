@@ -4,7 +4,6 @@
 package com.jeesite.modules;
 
 import com.jeesite.modules.socket.SocketServer;
-import com.jeesite.modules.socket.TagReader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
@@ -25,10 +24,8 @@ public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         ApplicationContext run = SpringApplication.run(Application.class, args);
         SocketServer socketServer = run.getBean(SocketServer.class);
-        TagReader tagReader = run.getBean(TagReader.class);
 
         new Thread(socketServer).start();
-        new Thread(tagReader).start();
     }
 
     @Override
