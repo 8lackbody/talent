@@ -4,6 +4,7 @@ package com.jeesite.modules.web;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jeesite.modules.dao.WarehouseDao;
+import com.jeesite.modules.entity.InventoryCheckForm;
 import com.jeesite.modules.entity.Warehouse;
 import com.jeesite.modules.result.ResultCode;
 import com.jeesite.modules.result.ResultVo;
@@ -50,4 +51,15 @@ public class AppController {
         //成功返回
         return ResultVo.ok().put(warehouse);
     }
+
+    /**
+     * 手持机发送请求，盘库操作
+     */
+    @RequestMapping(value = "inventoryCheck")
+    @ResponseBody
+    public ResultVo inventoryCheck(@RequestBody InventoryCheckForm inventoryCheckForm) {
+
+        return ResultVo.ok();
+    }
+
 }
