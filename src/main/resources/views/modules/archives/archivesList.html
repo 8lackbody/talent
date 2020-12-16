@@ -3,9 +3,11 @@
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('档案管理')}
+				<i class="fa icon-notebook"></i> ${text('archives管理')}
 			</div>
 			<div class="box-tools pull-right">
+				<input id="articleImageFile" name="excelFile" type="file" class="form-control" style="width: 300px; display: inline;" />
+				<input id="saveZipButton" type="button" style="width: 60px;height: 35px;" value="上传" />
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('archives:archives:edit')){ %>
 					<a href="${ctx}/archives/archives/form" class="btn btn-default btnTool" title="${text('新增archives')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
@@ -68,17 +70,13 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
+		{header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/archives/archives/form?archivesId='+row.archivesId+'" class="btnList" data-title="${text("编辑archives")}">'+(val||row.id)+'</a>';
 		}},
-		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
-		{header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"center"},
+		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"left"},
+		{header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"left"},
 		{header:'${text("仓库id")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
-		{header:'${text("update_date")}', name:'updateDate', index:'a.update_date', width:150, align:"center"},
-		{header:'${text("status")}', name:'status', index:'a.status', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text("未知")}', true);
-		}},
-		{header:'${text("备用字段")}', name:'remarks', index:'a.remarks', width:150, align:"center"},
+		{header:'${text("备用字段")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('archives:archives:edit')){ %>
@@ -93,4 +91,25 @@ $('#dataGrid').dataGrid({
 		
 	}
 });
+</script>
+<script>
+    $("#saveZipButton").on('click', function(){
+        var formData = new FormData();
+        var name = $("#articleImageFile").val();
+        formData.append("file",$("#articleImageFile")[0].files[0]);
+        formData.append("name",name);//这个地方可以传递多个参数
+        $.ajax({
+            url :  "${ctx}/record/record/export",
+            type : 'POST',
+            async : false,
+            data : formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData : false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType : false,
+            beforeSend:function(){
+                console.log("正在进行，请稍候");
+            }
+        });
+    });
 </script>

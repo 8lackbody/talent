@@ -31,7 +31,13 @@
 	</properties>
 
 	<dependencies>
-		
+		<!--jxl操作数据库-->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+
 		<!-- 核心模块 -->
 		<dependency>
 			<groupId>com.jeesite</groupId>
@@ -66,9 +72,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-
-
+		
 		<!-- 自定义jar依赖包演示
 		<dependency>
 			<groupId>com.jeesite</groupId>
