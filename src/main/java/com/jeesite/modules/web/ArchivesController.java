@@ -6,9 +6,9 @@ package com.jeesite.modules.web;
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
+import com.jeesite.modules.common.MultipartFileToFile;
 import com.jeesite.modules.entity.Archives;
 import com.jeesite.modules.service.ArchivesService;
-import com.jeesite.modules.socket.MultipartFileToFile;
 import jxl.Sheet;
 import jxl.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -114,7 +114,7 @@ public class ArchivesController extends BaseController {
         }
         try {
             Workbook rwb = Workbook.getWorkbook(file1);
-            Sheet rs = (Sheet) rwb.getSheet("Sheet1");//或者rwb.getSheet(0)
+            Sheet rs = rwb.getSheet("Sheet1");//或者rwb.getSheet(0)
             int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行
 

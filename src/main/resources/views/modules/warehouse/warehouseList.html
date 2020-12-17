@@ -50,9 +50,7 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("广告机IP地址")}', name:'andriodIp', index:'a.andriod_ip', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" data-title="${text("编辑warehouse")}">'+(val||row.id)+'</a>';
-		}},
+		{header:'${text("广告机IP地址")}', name:'andriodIp', index:'a.andriod_ip', width:150, align:"center", frozen:true},
 		{header:'${text("仓库名字")}', name:'warehouseName', index:'a.warehouse_name', width:150, align:"center"},
 		{header:'${text("机构名称")}', name:'mechanismName', index:'a.mechanism_name', width:150, align:"center"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){

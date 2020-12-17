@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="${ctxStatic}/jquery-toastr/2.1/toastr.min.css?${_version}">
 <link rel="stylesheet" href="${ctxStatic}/modules/sys/sysLogin.css?${_version}">
 <div class="login-box" style="margin:7% auto 300px auto;">
+	<div class="login-logo">
+		<a href="${ctx}/login"><b>${@Global.getConfig('productName')}</b>
+			<small>${@Global.getConfig('productVersion')}</small></a>
+	</div>
 	<div class="login-box-body">
 		<% var isLoginByValidCode = @Global.getConfigToBoolean('user.loginByValidCode', 'true'); %>
 		<% if(isLoginByValidCode){ %>
@@ -69,7 +73,6 @@
 		</#form:form>
 		<div class="row">
 			<div class="col-xs-12">
-				<a href="${ctxPath}/account/forgetPwd" class="pull-left">[ ${text('忘记密码')} ]</a>
 				<% if(@Global.getConfigToBoolean('sys.account.registerUser', 'false')){ %>
 					<a href="${ctxPath}/account/registerUser" class="pull-left ml10">[ ${text('注册账号')} ]</a>
 				<% } %>
@@ -91,9 +94,9 @@
 		</div>
 	</div>
 	<div class="login-copyright">
-		&copy;<a
+		&copy; ${@DateUtils.getYear()} ${@Global.getConfig('productName')} - Powered By <a
 			id="loginKey" data-key="${@Global.getConfig('shiro.loginSubmit.secretKey')}"
-			href="http://jeesite.com" ></a>
+			href="http://jeesite.com" >JeeSite ${@Global.getProperty('jeesiteVersion')}</a>
 	</div>
 </div>
 <% } %>

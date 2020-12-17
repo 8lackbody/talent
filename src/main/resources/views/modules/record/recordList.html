@@ -3,12 +3,10 @@
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('record管理')}
+				<i class="fa icon-notebook"></i> ${text('扫描记录管理')}
 			</div>
 			<div class="box-tools pull-right">
-                <input id="articleImageFile" name="excelFile" type="file" class="form-control" style="width: 300px; display: inline;" />
-                <input id="saveZipButton" type="button" style="width: 60px;height: 35px;" value="上传" />
-				<a href="#" class="btn btn-default" id="btnExport" title="${text('导出')}"><i class="fa"></i> ${text('导出')}</a>
+				<a href="#" class="btn btn-success" id="btnExport" title="${text('导出')}"><i class="fa"></i> ${text('导出')}</a>
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('record:record:edit')){ %>
 					<a href="${ctx}/record/record/form" class="btn btn-default btnTool" title="${text('新增record')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
@@ -55,7 +53,7 @@
 	</div>
 </div>
 <% } %>
-<script type="text/javascript" src="../../../static/jquery.table2excel.js"></script>
+<script type="text/javascript" src="../../../static/common/jquery.table2excel.js"></script>
 <script type="text/javascript">
     $("#btnExport").click(function(){
         $("#dataGrid").table2excel({
@@ -73,11 +71,9 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/record/record/form?recordId='+row.recordId+'" class="btnList" data-title="${text("编辑record")}">'+(val||row.id)+'</a>';
-		}},
-		{header:'${text("检测到的标签号")}', name:'epc', index:'a.epc', width:150, align:"center"},
-		{header:'${text("哪个仓库上传的")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
+		{header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"center", frozen:true},
+		{header:'${text("标签号")}', name:'epc', index:'a.epc', width:150, align:"center"},
+		{header:'${text("仓库名称")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
 		{header:'${text("确认状态")}', name:'confirmStatus', index:'a.confirm_status', width:150, align:"center"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
@@ -93,25 +89,4 @@ $('#dataGrid').dataGrid({
 		
 	}
 });
-</script>
-<script>
-    $("#saveZipButton").on('click', function(){
-        var formData = new FormData();
-        var name = $("#articleImageFile").val();
-        formData.append("file",$("#articleImageFile")[0].files[0]);
-        formData.append("name",name);//这个地方可以传递多个参数
-        $.ajax({
-            url :  "${ctx}/record/record/export",
-            type : 'POST',
-            async : false,
-            data : formData,
-            // 告诉jQuery不要去处理发送的数据
-            processData : false,
-            // 告诉jQuery不要去设置Content-Type请求头
-            contentType : false,
-            beforeSend:function(){
-                console.log("正在进行，请稍候");
-            }
-        });
-    });
 </script>
