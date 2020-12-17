@@ -114,7 +114,7 @@ public class ArchivesController extends BaseController {
         }
         try {
             Workbook rwb = Workbook.getWorkbook(file1);
-            Sheet rs = (Sheet) rwb.getSheet("Sheet1");//或者rwb.getSheet(0)
+            Sheet rs = rwb.getSheet("Sheet1");//或者rwb.getSheet(0)
             int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行
 

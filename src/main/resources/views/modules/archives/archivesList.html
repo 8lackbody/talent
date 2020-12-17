@@ -3,11 +3,11 @@
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('archives管理')}
+				<i class="fa icon-notebook"></i> ${text('标签档案管理')}
 			</div>
 			<div class="box-tools pull-right">
-				<input id="articleImageFile" name="excelFile" type="file" class="form-control" style="width: 300px; display: inline;" />
-				<input id="saveZipButton" type="button" style="width: 60px;height: 35px;" value="上传" />
+				<input id="articleImageFile" name="excelFile" type="file" class="btn btn-default" style="width: 300px; height: 30px; display: inline;" />
+				<input class="btn btn-success" id="saveZipButton" type="button" value="上传" />
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('archives:archives:edit')){ %>
 					<a href="${ctx}/archives/archives/form" class="btn btn-default btnTool" title="${text('新增archives')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
@@ -31,12 +31,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('身份证号')}：</label>
-					<div class="control-inline">
-						<#form:input path="cardId" maxlength="50" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label">${text('仓库id')}：</label>
 					<div class="control-inline">
 						<#form:input path="warehouseId" maxlength="11" class="form-control width-120"/>
@@ -46,12 +40,6 @@
 					<label class="control-label">${text('status')}：</label>
 					<div class="control-inline width-120">
 						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control isQuick"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('备用字段')}：</label>
-					<div class="control-inline">
-						<#form:input path="remarks" maxlength="20" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -70,13 +58,11 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/archives/archives/form?archivesId='+row.archivesId+'" class="btnList" data-title="${text("编辑archives")}">'+(val||row.id)+'</a>';
-		}},
-		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"left"},
-		{header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"left"},
-		{header:'${text("仓库id")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
-		{header:'${text("备用字段")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"center", frozen:true},
+		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
+		{header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"center"},
+		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
+		{header:'${text("备注")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('archives:archives:edit')){ %>
