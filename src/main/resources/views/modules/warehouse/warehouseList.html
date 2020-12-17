@@ -3,7 +3,7 @@
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('仓库管理')}
+				<i class="fa icon-notebook"></i> ${text('warehouse管理')}
 			</div>
 			<div class="box-tools pull-right">
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
@@ -59,7 +59,7 @@ $('#dataGrid').dataGrid({
 			var actions = [];
 			<% if(hasPermi('warehouse:warehouse:edit')){ %>
 				actions.push('<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" title="${text("编辑warehouse")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除warehouse")}" data-confirm="${text("确认要删除该仓库吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除warehouse")}" data-confirm="${text("确认要删除该warehouse吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}

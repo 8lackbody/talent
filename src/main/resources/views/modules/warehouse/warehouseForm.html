@@ -9,7 +9,7 @@
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			</div>
 		</div>
-		<#form:form id="inputForm" model="${warehouse}" class="form-horizontal">
+		<#form:form id="inputForm" model="${warehouse}" action="${ctx}/warehouse/warehouse/save" method="post" class="form-horizontal">
 			<div class="box-body">
 				<div class="form-unit">${text('基本信息')}</div>
 				<#form:hidden path="warehouseId"/>
@@ -20,7 +20,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required hide">*</span> ${text('广告机IP地址')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<input id="andriodIp-add" path="andriodIp" maxlength="20" class="form-control"/>
+								<#form:input path="andriodIp" maxlength="20" class="form-control"/>
 							</div>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('仓库名字')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<input id="warehouseName-add" path="warehouseName" maxlength="20" class="form-control required"/>
+								<#form:input path="warehouseName" maxlength="20" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 							<label class="control-label col-sm-2" title="">
 								<span class="required ">*</span> ${text('机构名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<input id="mechanismName-add" path="mechanismName" maxlength="20" class="form-control required"/>
+								<#form:input path="mechanismName" maxlength="20" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -62,27 +62,8 @@
 	</div>
 </div>
 <% } %>
-<script type="text/javascript">
-    $("#btnSubmit").click(function(){
-        var andriodIp = $("#andriodIp-add").val();
-        var warehouseName = $("#warehouseName-add").val();
-        var mechanismName = $("#mechanismName-add").val();
-        $.ajax({
-            type:"POST",
-            url:"",
-            data:{
-                "andriodIp":andriodIp,
-                "warehousrName":warehouseName,
-                "mechanismName":mechanismName,
-            },
-            success: function (renderResult) {
-                alert(renderResult.text);
-            }
-        });
-    });
-</script>
 <script>
-/*$("#inputForm").validate({
+$("#inputForm").validate({
 	submitHandler: function(form){
 		js.ajaxSubmitForm($(form), function(data){
 			js.showMessage(data.message);
@@ -93,5 +74,5 @@
 			}
 		}, "json");
     }
-});*/
+});
 </script>
