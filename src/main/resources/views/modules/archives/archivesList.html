@@ -32,15 +32,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('仓库id')}：</label>
-					<div class="control-inline">
-						<#form:input path="warehouseId" maxlength="11" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('status')}：</label>
+					<label class="control-label">${text('仓库名')}：</label>
 					<div class="control-inline width-120">
-						<#form:select path="status" dictType="sys_search_status" blankOption="true" class="form-control isQuick"/>
+						<#form:select class="form-control" path="warehouseId" dictType="warehouse_name" blankOption="true" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -62,7 +56,9 @@ $('#dataGrid').dataGrid({
 		{header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"center", frozen:true},
 		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
 		{header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"center"},
-		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
+		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function(val, obj, row, act){
+				return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')},val, '${text("未知")}', true);
+			}},
 		{header:'${text("备注")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
