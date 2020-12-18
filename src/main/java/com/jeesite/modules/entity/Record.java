@@ -3,20 +3,22 @@
  */
 package com.jeesite.modules.entity;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import com.jeesite.common.mybatis.mapper.query.QueryType;
 
 /**
  * recordEntity
  * @author zht
- * @version 2020-12-09
+ * @version 2020-12-18
  */
 @Table(name="record", alias="a", columns={
 		@Column(name="record_id", attrName="recordId", label="record_id", isPK=true),
@@ -88,6 +90,22 @@ public class Record extends DataEntity<Record> {
 
 	public void setConfirmStatus(Integer confirmStatus) {
 		this.confirmStatus = confirmStatus;
+	}
+	
+	public Date getRecordTime_gte() {
+		return sqlMap.getWhere().getValue("record_time", QueryType.GTE);
+	}
+
+	public void setRecordTime_gte(Date recordTime) {
+		sqlMap.getWhere().and("record_time", QueryType.GTE, recordTime);
+	}
+	
+	public Date getRecordTime_lte() {
+		return sqlMap.getWhere().getValue("record_time", QueryType.LTE);
+	}
+
+	public void setRecordTime_lte(Date recordTime) {
+		sqlMap.getWhere().and("record_time", QueryType.LTE, recordTime);
 	}
 	
 }

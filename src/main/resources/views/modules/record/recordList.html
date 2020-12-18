@@ -20,7 +20,10 @@
 				<div class="form-group">
 					<label class="control-label">${text('检测时间')}：</label>
 					<div class="control-inline">
-						<#form:input path="recordTime" readonly="true" maxlength="20" class="form-control laydate width-datetime"
+						<#form:input path="recordTime_gte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
+							dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm" data-done="recordTime_lte.click()"/>
+						&nbsp;-&nbsp;
+						<#form:input path="recordTime_lte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
 							dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"/>
 					</div>
 				</div>
