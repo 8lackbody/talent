@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>talent</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>jeesite-we</name>
     <url>http://jeesite.com</url>
@@ -83,7 +83,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/test-core-1.0.jar</systemPath>
         </dependency> -->
-
+        <!--   mvn install:install-file -DgroupId=com.impinj -DartifactId=impinj -Dversion=1.0.0 -Dpackaging=jar -Dfile=lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar-->
+        <dependency>
+            <groupId>com.impinj</groupId>
+            <artifactId>impinj</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
