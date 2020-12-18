@@ -6,6 +6,7 @@
 				<i class="fa icon-notebook"></i> ${text('标签档案管理')}
 			</div>
 			<div class="box-tools pull-right">
+				<!-- <a href="../../static/test.xls" download="test1.xls">下载Excel模版</a> -->
 				<input id="articleImageFile" name="excelFile" type="file" class="btn btn-default" style="width: 300px; height: 30px; display: inline;" />
 				<input class="btn btn-success" id="saveZipButton" type="button" value="上传" />
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
@@ -85,7 +86,7 @@ $('#dataGrid').dataGrid({
         formData.append("file",$("#articleImageFile")[0].files[0]);
         formData.append("name",name);//这个地方可以传递多个参数
         $.ajax({
-            url :  "${ctx}/record/record/export",
+            url :  "${ctx}/archives/archives/export",
             type : 'POST',
             async : false,
             data : formData,
@@ -97,5 +98,6 @@ $('#dataGrid').dataGrid({
                 console.log("正在进行，请稍候");
             }
         });
+        alert("导入完成");
     });
 </script>
