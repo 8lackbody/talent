@@ -3,20 +3,22 @@
  */
 package com.jeesite.modules.entity;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import com.jeesite.common.mybatis.mapper.query.QueryType;
 
 /**
  * recordEntity
  * @author zht
- * @version 2020-12-09
+ * @version 2020-12-18
  */
 @Table(name="record", alias="a", columns={
 		@Column(name="record_id", attrName="recordId", label="record_id", isPK=true),
@@ -33,7 +35,7 @@ public class Record extends DataEntity<Record> {
 	private Long recordId;		// record_id
 	private Date recordTime;		// 检测时间
 	private String epc;		// 检测到的标签号
-	private Long warehouseId;		// 哪个仓库上传的
+	private Integer warehouseId;		// 哪个仓库上传的
 	private Integer confirmStatus;		// 确认状态
 	
 	public Record() {
@@ -73,11 +75,11 @@ public class Record extends DataEntity<Record> {
 	}
 	
 	@NotNull(message="哪个仓库上传的不能为空")
-	public Long getWarehouseId() {
+	public Integer getWarehouseId() {
 		return warehouseId;
 	}
 
-	public void setWarehouseId(Long warehouseId) {
+	public void setWarehouseId(Integer warehouseId) {
 		this.warehouseId = warehouseId;
 	}
 	
@@ -88,6 +90,22 @@ public class Record extends DataEntity<Record> {
 
 	public void setConfirmStatus(Integer confirmStatus) {
 		this.confirmStatus = confirmStatus;
+	}
+	
+	public Date getRecordTime_gte() {
+		return sqlMap.getWhere().getValue("record_time", QueryType.GTE);
+	}
+
+	public void setRecordTime_gte(Date recordTime) {
+		sqlMap.getWhere().and("record_time", QueryType.GTE, recordTime);
+	}
+	
+	public Date getRecordTime_lte() {
+		return sqlMap.getWhere().getValue("record_time", QueryType.LTE);
+	}
+
+	public void setRecordTime_lte(Date recordTime) {
+		sqlMap.getWhere().and("record_time", QueryType.LTE, recordTime);
 	}
 	
 }

@@ -637,3 +637,17 @@ Action:
 
 Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
 
+2020-12-18 15:06:12.471 ERROR 3638 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8980 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8980 or configure this application to listen on another port.
+

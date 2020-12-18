@@ -20,26 +20,23 @@
 				<div class="form-group">
 					<label class="control-label">${text('检测时间')}：</label>
 					<div class="control-inline">
-						<#form:input path="recordTime" readonly="true" maxlength="20" class="form-control laydate width-datetime"
+						<#form:input path="recordTime_gte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
+							dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm" data-done="recordTime_lte.click()"/>
+						&nbsp;-&nbsp;
+						<#form:input path="recordTime_lte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
 							dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('检测到的标签号')}：</label>
+					<label class="control-label">${text('标签号')}：</label>
 					<div class="control-inline">
 						<#form:input path="epc" maxlength="255" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('哪个仓库上传的')}：</label>
-					<div class="control-inline">
-						<#form:input path="warehouseId" maxlength="11" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">${text('确认状态')}：</label>
-					<div class="control-inline">
-						<#form:input path="confirmStatus" maxlength="1" class="form-control width-120"/>
+					<label class="control-label">${text('仓库名')}：</label>
+					<div class="control-inline width-120">
+						<#form:select class="form-control" path="warehouseId" dictType="warehouse_name" blankOption="true" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -53,13 +50,22 @@
 	</div>
 </div>
 <% } %>
-<script type="text/javascript" src="../../../static/common/jquery.table2excel.js"></script>
+<script type="text/javascript" src="${ctxStatic}/jquery.table2excel.js"></script>
 <script type="text/javascript">
     $("#btnExport").click(function(){
+		var myDate = new Date;
+        var year = myDate.getFullYear(); //获取当前年
+        var mon = myDate.getMonth() + 1; //获取当前月
+        var date = myDate.getDate(); //获取当前日
+        var week = myDate.getDay();
+        var h = myDate.getHours();//获取当前小时数(0-23)
+        var m = myDate.getMinutes();//获取当前分钟数(0-59)
+        var s = myDate.getSeconds();//获取当前秒
+        var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
         $("#dataGrid").table2excel({
             exclude: ".noExl",
             name: "Excel Document Name",
-            filename: "myFileName",
+            filename: year + "年" + mon + "月" + date + "日 导出记录",
             exclude_img: true,
             exclude_links: true,
             exclude_inputs: true
@@ -71,10 +77,11 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"center", frozen:true},
-		{header:'${text("标签号")}', name:'epc', index:'a.epc', width:150, align:"center"},
-		{header:'${text("仓库名称")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center"},
-		{header:'${text("确认状态")}', name:'confirmStatus', index:'a.confirm_status', width:150, align:"center"},
+		{header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"left", frozen:true},
+		{header:'${text("标签号")}', name:'epc', index:'a.epc', width:150, align:"left"},
+		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')},val, '${text("未知")}', true);
+		}},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('record:record:edit')){ %>

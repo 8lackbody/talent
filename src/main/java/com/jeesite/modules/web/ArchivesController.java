@@ -119,13 +119,13 @@ public class ArchivesController extends BaseController {
             int rows = rs.getRows();//得到所有的行
 
             System.out.println(clos + " rows:" + rows);
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
                     String epc = rs.getCell(j++, i).getContents();
                     String name = rs.getCell(j++, i).getContents();
                     String cardId = rs.getCell(j++, i).getContents();
-                    Long wareHouseId = Long.valueOf(rs.getCell(j++, i).getContents());
+                    Integer wareHouseId = Integer.valueOf(rs.getCell(j++, i).getContents());
                     Archives archives = new Archives();
                     archives.setEpc(epc);
                     archives.setName(name);

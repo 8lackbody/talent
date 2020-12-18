@@ -33,7 +33,7 @@ public class Archives extends DataEntity<Archives> {
 	private String epc;		// 电子标签号
 	private String name;		// 姓名
 	private String cardId;		// 身份证号
-	private Long warehouseId;		// 仓库id
+	private Integer warehouseId;		// 仓库id
 	
 	public Archives() {
 		this(null);
@@ -81,11 +81,11 @@ public class Archives extends DataEntity<Archives> {
 	}
 	
 	@NotNull(message="仓库id不能为空")
-	public Long getWarehouseId() {
+	public Integer getWarehouseId() {
 		return warehouseId;
 	}
 
-	public void setWarehouseId(Long warehouseId) {
+	public void setWarehouseId(Integer warehouseId) {
 		this.warehouseId = warehouseId;
 	}
 	

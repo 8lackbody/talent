@@ -5,12 +5,18 @@ import com.jeesite.modules.entity.InventoryCheckForm;
 import com.jeesite.modules.entity.Warehouse;
 import com.jeesite.modules.result.ResultCode;
 import com.jeesite.modules.result.ResultVo;
+import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * appController
@@ -24,6 +30,7 @@ public class AppController {
 
     @Autowired
     WarehouseService warehouseService;
+    ArchivesService archivesServicel;
 
     /**
      * 查询列表
@@ -55,8 +62,38 @@ public class AppController {
     @RequestMapping(value = "inventoryCheck")
     @ResponseBody
     public ResultVo inventoryCheck(@RequestBody InventoryCheckForm inventoryCheckForm) {
+        //找出丢失标签
+        String startEpc = inventoryCheckForm.getStartEpc();
+        String endEpc = inventoryCheckForm.getEndEpc();
+        List<String> foundList = inventoryCheckForm.getFound();
+        List<String> lostList = new ArrayList<>();
+        List<String> unknowList = new ArrayList<>();
+        for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i ++){
+            String temp = String.valueOf(Long.valueOf(startEpc) + i);
+            int count = 0;
+            for (int j = 0; j < foundList.size(); j ++){
+                if (foundList.get(j).equals(temp)){
+                    count = 1;
+                }
+            }
+            if (count == 0){
+                lostList.add(temp);
+            }
+        }
 
-        return ResultVo.ok();
+        //找出不在库中的标签
+        for (int i = 0; i < foundList.size(); i++){
+            String name = archivesServicel.getNameByEpc(foundList.get(i));
+            if (name == null){
+                unknowList.add(foundList.get(i));
+            }
+        }
+
+        Map<String,List<String>> map = new HashMap<String, List<String>>();
+        map.put("Data",lostList);
+        map.put("Unknow",unknowList);
+
+        return ResultVo.ok().put(map);
     }
 
 }

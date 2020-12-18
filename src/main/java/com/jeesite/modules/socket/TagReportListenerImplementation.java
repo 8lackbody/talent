@@ -30,7 +30,7 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private HashSet<EPCTag> sets;
 
-    private Long warehouseId;
+    private Integer warehouseId;
 
     private SocketServer socketServer;
 
@@ -40,7 +40,7 @@ public class TagReportListenerImplementation implements TagReportListener {
     @Autowired
     private ArchivesService archivesService;
 
-    public TagReportListenerImplementation(Long warehouseId) {
+    public TagReportListenerImplementation(Integer warehouseId) {
         this.warehouseId = warehouseId;
         sets = new HashSet<>();
         time = LocalDateTime.now();
