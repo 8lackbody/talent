@@ -78,7 +78,6 @@ public class RecordController extends BaseController {
 	@PostMapping(value = "save")
 	@ResponseBody
 	public String save(@Validated Record record) {
-        System.out.println(record);
 		recordService.save(record);
 		return renderResult(Global.TRUE, text("保存record成功！"));
 	}
