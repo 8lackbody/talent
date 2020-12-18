@@ -119,7 +119,7 @@ public class ArchivesController extends BaseController {
             int rows = rs.getRows();//得到所有的行
 
             System.out.println(clos + " rows:" + rows);
-            for (int i = 0; i < rows; i++) {
+            for (int i = 1; i < rows; i++) {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
                     String epc = rs.getCell(j++, i).getContents();
