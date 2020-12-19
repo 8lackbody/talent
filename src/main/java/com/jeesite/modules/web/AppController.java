@@ -62,30 +62,35 @@ public class AppController {
     @RequestMapping(value = "inventoryCheck")
     @ResponseBody
     public ResultVo inventoryCheck(@RequestBody InventoryCheckForm inventoryCheckForm) {
-        //找出丢失标签
         String startEpc = inventoryCheckForm.getStartEpc();
         String endEpc = inventoryCheckForm.getEndEpc();
         List<String> foundList = inventoryCheckForm.getFound();
-        List<String> lostList = new ArrayList<>();
-        List<String> unknowList = new ArrayList<>();
+        List<String> inLibraryList = new ArrayList<>();
         for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i ++){
             String temp = String.valueOf(Long.valueOf(startEpc) + i);
-            int count = 0;
-            for (int j = 0; j < foundList.size(); j ++){
-                if (foundList.get(j).equals(temp)){
-                    count = 1;
-                }
-            }
-            if (count == 0){
-                lostList.add(temp);
+            String name = archivesServicel.getNameByEpc(temp);
+            if (name != null){
+                inLibraryList.add(temp);
             }
         }
 
-        //找出不在库中的标签
+        //找出未知的标签
+        List<String> unknowList = new ArrayList<>(foundList);
+        for (int i = 0; i < inLibraryList.size(); i++){
+            for (int j = 0; j < unknowList.size(); j++){
+                if (inLibraryList.get(i).equals(unknowList.get(j))){
+                    unknowList.remove(j);
+                }
+            }
+        }
+
+        //找出丢失的标签
+        List<String> lostList = new ArrayList<>(inLibraryList);
         for (int i = 0; i < foundList.size(); i++){
-            String name = archivesServicel.getNameByEpc(foundList.get(i));
-            if (name == null){
-                unknowList.add(foundList.get(i));
+            for (int j = 0; j < lostList.size(); j++){
+                if (foundList.get(i).equals(lostList.get(j))){
+                    lostList.remove(j);
+                }
             }
         }
 
