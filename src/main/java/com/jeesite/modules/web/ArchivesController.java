@@ -125,7 +125,7 @@ public class ArchivesController extends BaseController {
                     String epc = rs.getCell(j++, i).getContents();
                     String name = rs.getCell(j++, i).getContents();
                     String cardId = rs.getCell(j++, i).getContents();
-                    Long wareHouseId = Long.valueOf(rs.getCell(j++, i).getContents());
+                    Integer wareHouseId = Integer.valueOf(rs.getCell(j++, i).getContents());
                     Archives archives = new Archives();
                     archives.setEpc(epc);
                     archives.setName(name);

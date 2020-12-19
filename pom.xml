@@ -7,13 +7,12 @@
         <groupId>com.jeesite</groupId>
         <artifactId>jeesite-parent</artifactId>
         <version>4.2.2-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>jeesite-test</artifactId>
-    <packaging>war</packaging>
+    <artifactId>talent</artifactId>
+    <packaging>jar</packaging>
 
-    <name>JeeSite Web</name>
+    <name>jeesite-we</name>
     <url>http://jeesite.com</url>
     <inceptionYear>2013-Now</inceptionYear>
 
@@ -32,18 +31,19 @@
     </properties>
 
     <dependencies>
-        <!--jxl操作数据库-->
-        <dependency>
-            <groupId>net.sourceforge.jexcelapi</groupId>
-            <artifactId>jxl</artifactId>
-            <version>2.6.12</version>
-        </dependency>
 
         <!-- 核心模块 -->
         <dependency>
             <groupId>com.jeesite</groupId>
             <artifactId>jeesite-module-core</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <!--jxl操作数据库-->
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.12</version>
         </dependency>
 
         <!-- 在线文档接口 -->
@@ -74,6 +74,7 @@
             <scope>provided</scope>
         </dependency>
 
+
         <!-- 自定义jar依赖包演示
         <dependency>
             <groupId>com.jeesite</groupId>
@@ -82,7 +83,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/test-core-1.0.jar</systemPath>
         </dependency> -->
-
+        <!--   mvn install:install-file -DgroupId=com.impinj -DartifactId=impinj -Dversion=1.0.0 -Dpackaging=jar -Dfile=lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar-->
+        <dependency>
+            <groupId>com.impinj</groupId>
+            <artifactId>impinj</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -139,7 +145,9 @@
             <id>thinkgem</id>
             <name>WangZhen</name>
             <email>thinkgem at 163.com</email>
-            <roles><role>Project lead</role></roles>
+            <roles>
+                <role>Project lead</role>
+            </roles>
             <timezone>+8</timezone>
         </developer>
     </developers>
@@ -153,8 +161,12 @@
         <repository>
             <id>aliyun-repos</id>
             <url>https://maven.aliyun.com/repository/public</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>jeesite-repos</id>
@@ -165,8 +177,12 @@
         <pluginRepository>
             <id>aliyun-repos</id>
             <url>https://maven.aliyun.com/repository/public</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
         <pluginRepository>
             <id>jeesite-repos</id>

@@ -35,7 +35,7 @@ public class Record extends DataEntity<Record> {
 	private Long recordId;		// record_id
 	private Date recordTime;		// 检测时间
 	private String epc;		// 检测到的标签号
-	private Long warehouseId;		// 哪个仓库上传的
+	private Integer warehouseId;		// 哪个仓库上传的
 	private Integer confirmStatus;		// 确认状态
 	
 	public Record() {
@@ -75,11 +75,11 @@ public class Record extends DataEntity<Record> {
 	}
 	
 	@NotNull(message="哪个仓库上传的不能为空")
-	public Long getWarehouseId() {
+	public Integer getWarehouseId() {
 		return warehouseId;
 	}
 
-	public void setWarehouseId(Long warehouseId) {
+	public void setWarehouseId(Integer warehouseId) {
 		this.warehouseId = warehouseId;
 	}
 	
