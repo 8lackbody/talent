@@ -6,7 +6,6 @@ package com.jeesite.modules.web;
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
-import com.jeesite.modules.common.MultipartFileToFile;
 import com.jeesite.modules.entity.Archives;
 import com.jeesite.modules.service.ArchivesService;
 import jxl.Sheet;
@@ -27,7 +26,7 @@ import java.io.File;
  * archivesController
  *
  * @author zht
- * @version 2020-12-15
+ * @version 2020-12-21
  */
 @Controller
 @RequestMapping(value = "${adminPath}/archives/archives")
@@ -40,8 +39,8 @@ public class ArchivesController extends BaseController {
      * 获取数据
      */
     @ModelAttribute
-    public Archives get(Long archivesId, boolean isNewRecord) {
-        return archivesService.get(String.valueOf(archivesId), isNewRecord);
+    public Archives get(String archivesId, boolean isNewRecord) {
+        return archivesService.get(archivesId, isNewRecord);
     }
 
     /**
@@ -105,7 +104,7 @@ public class ArchivesController extends BaseController {
     public String export(@RequestParam("file") MultipartFile file,
                          HttpServletRequest request, HttpServletResponse response) {
         System.out.println(file);
-        MultipartFileToFile multipartFileToFile = new MultipartFileToFile();
+        com.jeesite.modules.common.MultipartFileToFile multipartFileToFile = new com.jeesite.modules.common.MultipartFileToFile();
         File file1 = null;
         try {
             file1 = multipartFileToFile.multipartFileToFile(file);
@@ -125,12 +124,10 @@ public class ArchivesController extends BaseController {
                     String epc = rs.getCell(j++, i).getContents();
                     String name = rs.getCell(j++, i).getContents();
                     String cardId = rs.getCell(j++, i).getContents();
-                    Integer wareHouseId = Integer.valueOf(rs.getCell(j++, i).getContents());
                     Archives archives = new Archives();
                     archives.setEpc(epc);
                     archives.setName(name);
                     archives.setCardId(cardId);
-                    archives.setWarehouseId(wareHouseId);
                     archivesService.save(archives);
                 }
             }

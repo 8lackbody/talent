@@ -66,19 +66,19 @@ public class AppController {
         String endEpc = inventoryCheckForm.getEndEpc();
         List<String> foundList = inventoryCheckForm.getFound();
         List<String> inLibraryList = new ArrayList<>();
-        for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i ++){
+        for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
             String temp = String.valueOf(Long.valueOf(startEpc) + i);
             String name = archivesServicel.getNameByEpc(temp);
-            if (name != null){
+            if (name != null) {
                 inLibraryList.add(temp);
             }
         }
 
         //找出未知的标签
         List<String> unknowList = new ArrayList<>(foundList);
-        for (int i = 0; i < inLibraryList.size(); i++){
-            for (int j = 0; j < unknowList.size(); j++){
-                if (inLibraryList.get(i).equals(unknowList.get(j))){
+        for (int i = 0; i < inLibraryList.size(); i++) {
+            for (int j = 0; j < unknowList.size(); j++) {
+                if (inLibraryList.get(i).equals(unknowList.get(j))) {
                     unknowList.remove(j);
                 }
             }
@@ -86,17 +86,17 @@ public class AppController {
 
         //找出丢失的标签
         List<String> lostList = new ArrayList<>(inLibraryList);
-        for (int i = 0; i < foundList.size(); i++){
-            for (int j = 0; j < lostList.size(); j++){
-                if (foundList.get(i).equals(lostList.get(j))){
+        for (int i = 0; i < foundList.size(); i++) {
+            for (int j = 0; j < lostList.size(); j++) {
+                if (foundList.get(i).equals(lostList.get(j))) {
                     lostList.remove(j);
                 }
             }
         }
 
-        Map<String,List<String>> map = new HashMap<String, List<String>>();
-        map.put("Data",lostList);
-        map.put("Unknow",unknowList);
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        map.put("Data", lostList);
+        map.put("Unknow", unknowList);
 
         return ResultVo.ok().put(map);
     }

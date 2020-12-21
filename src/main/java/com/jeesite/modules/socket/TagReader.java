@@ -10,12 +10,12 @@ public class TagReader implements Runnable {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private String hostname = "192.168.1.100";
-    private Integer warehouseId = 1;
+    private String warehouseId = "1";
 
     public TagReader() {
     }
 
-    public TagReader(String hostname, Integer warehouseId) {
+    public TagReader(String hostname, String warehouseId) {
         this.hostname = hostname;
         this.warehouseId = warehouseId;
     }

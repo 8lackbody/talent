@@ -51,6 +51,7 @@ public class EPCTag {
         this.name = name;
         this.status = status;
     }
+
     public EPCTag() {
     }
 
