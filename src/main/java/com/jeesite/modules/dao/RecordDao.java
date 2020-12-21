@@ -9,10 +9,11 @@ import com.jeesite.modules.entity.Record;
 
 /**
  * recordDAO接口
+ *
  * @author zht
  * @version 2020-12-09
  */
 @MyBatisDao
 public interface RecordDao extends CrudDao<Record> {
-	
+
 }

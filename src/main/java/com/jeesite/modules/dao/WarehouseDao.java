@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * warehouseDAO接口
+ *
  * @author zht
  * @version 2020-12-09
  */
@@ -19,5 +20,5 @@ public interface WarehouseDao extends CrudDao<Warehouse> {
 
     @Select("SELECT * FROM warehouse WHERE andriod_ip = #{ip}")
     Warehouse findByAndroidIp(@Param("ip") String ip);
-	
+
 }
