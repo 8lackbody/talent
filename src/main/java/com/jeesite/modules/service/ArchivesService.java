@@ -10,6 +10,8 @@ import com.jeesite.modules.entity.Archives;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * archivesService
  *
@@ -84,5 +86,15 @@ public class ArchivesService extends CrudService<ArchivesDao, Archives> {
     public String getNameByEpc(String epc) {
         return super.dao.getNameByEpc(epc);
     }
+
+    /**
+     * 获取在库中的epc
+     * @param epcs
+     * @return
+     */
+    public List<String> findBatchByEpcs(List<String> epcs){
+        return super.dao.findBatchByEpcs(epcs);
+    }
+
 
 }
