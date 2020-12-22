@@ -20,10 +20,8 @@
             </div>
         </div>
         <div class="box-body">
-            <#form:form id="searchForm" model="${archives}" action="${ctx}/archives/archives/listData" method="post"
-            class="form-inline hide"
-            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}"
-            data-order-by="${parameter.orderBy}">
+            <#form:form id="searchForm" model="${archives}" action="${ctx}/archives/archives/listData" method="post" class="form-inline hide"
+            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
             <div class="form-group">
                 <label class="control-label">${text('电子标签号')}：</label>
                 <div class="control-inline">
@@ -40,8 +38,7 @@
                 <button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
                 <button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
             </div>
-        </
-        #form:form>
+        </#form:form>
         <table id="dataGrid"></table>
         <div id="dataGridPage"></div>
     </div>
@@ -53,31 +50,21 @@
     $('#dataGrid').dataGrid({
         searchForm: $("#searchForm"),
         columnModel: [
-            {header: '${text("电子标签号")}', name: 'epc', index: 'a.epc', width: 150, align: "center", frozen: true},
-            {header: '${text("姓名")}', name: 'name', index: 'a.name', width: 150, align: "center"},
-            {header: '${text("身份证号")}', name: 'cardId', index: 'a.card_id', width: 150, align: "center"},
-            {header: '${text("备注")}', name: 'remarks', index: 'a.remarks', width: 150, align: "left"},
-            {
-                header: '${text("操作")}',
-                name: 'actions',
-                width: 120,
-                sortable: false,
-                title: false,
-                formatter: function (val, obj, row, act) {
+            {header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"center", frozen:true},
+            {header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
+            {header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"center"},
+            {header:'${text("备注")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+            {header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
                     var actions = [];
-                <%
-                    if (hasPermi('archives:archives:edit')) { %>
-                        actions.push('<a href="${ctx}/archives/archives/form?archivesId=' + row.archivesId + '" class="btnList" title="${text("编辑archives")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-                        actions.push('<a href="${ctx}/archives/archives/delete?archivesId=' + row.archivesId + '" class="btnList" title="${text("删除archives")}" data-confirm="${text("确认要删除该archives吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
-                    <%
-                    }
-                %>
+                <% if(hasPermi('archives:archives:edit')){ %>
+                        actions.push('<a href="${ctx}/archives/archives/form?archivesId='+row.archivesId+'" class="btnList" title="${text("编辑archives")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+                        actions.push('<a href="${ctx}/archives/archives/delete?archivesId='+row.archivesId+'" class="btnList" title="${text("删除archives")}" data-confirm="${text("确认要删除该archives吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+                    <% } %>
                     return actions.join('');
-                }
-            }
+                }}
         ],
         // 加载成功后执行事件
-        ajaxSuccess: function (data) {
+        ajaxSuccess: function(data){
 
         }
     });

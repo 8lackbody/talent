@@ -10,8 +10,7 @@
                 </button>
             </div>
         </div>
-        <#form:form id="inputForm" model="${warehouse}" action="${ctx}/warehouse/warehouse/save" method="post"
-        class="form-horizontal">
+        <#form:form id="inputForm" model="${warehouse}" action="${ctx}/warehouse/warehouse/save" method="post" class="form-horizontal">
         <div class="box-body">
             <div class="form-unit">${text('基本信息')}</div>
             <#form:hidden path="warehouseId"/>
@@ -67,8 +66,7 @@
                     </div>
                 </div>
             </div>
-        </
-        #form:form>
+        </#form:form>
     </div>
 </div>
 <% } %>

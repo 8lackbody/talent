@@ -10,8 +10,7 @@
                 </button>
             </div>
         </div>
-        <#form:form id="inputForm" model="${record}" action="${ctx}/record/record/save" method="post"
-        class="form-horizontal">
+        <#form:form id="inputForm" model="${record}" action="${ctx}/record/record/save" method="post" class="form-horizontal">
         <div class="box-body">
             <div class="form-unit">${text('基本信息')}</div>
             <#form:hidden path="recordId"/>
@@ -22,8 +21,7 @@
                             <span class="required ">*</span> ${text('检测时间')}：<i
                                 class="fa icon-question hide"></i></label>
                         <div class="col-sm-8">
-                            <#form:input path="recordTime" readonly="true" maxlength="20" class="form-control laydate
-                            required"
+                            <#form:input path="recordTime" readonly="true" maxlength="20" class="form-control laydate required"
                             dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"/>
                         </div>
                     </div>
@@ -84,8 +82,7 @@
                 </div>
             </div>
         </div>
-    </
-    #form:form>
+    </#form:form>
 </div>
 </div>
 <% } %>
