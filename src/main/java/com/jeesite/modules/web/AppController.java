@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * archivesController
+ * AppController
  *
  * @author zht
  * @version 2020-12-15
@@ -32,7 +32,6 @@ public class AppController {
     @Autowired
     WarehouseService warehouseService;
     ArchivesService archivesService;
-    IsNumeric isNumeric;
 
     /**
      * 查询列表
@@ -69,40 +68,20 @@ public class AppController {
         String endEpc = inventoryCheckForm.getEndEpc();
         List<String> foundList = inventoryCheckForm.getFound();
         List<String> tempList = new ArrayList<>();
-        List<String> inLibraryList;
         List<String> unknowList;
         List<String> lostList;
 
-        IsNumeric isNumeric = new IsNumeric();
-
         //判断入参不为空且都为整数
-        if (isNumeric.isInteger(startEpc) && isNumeric.isInteger(endEpc) && isNumeric.isIntegerList(foundList)){
+        if (IsNumeric.isInteger(startEpc) && IsNumeric.isInteger(endEpc) && IsNumeric.isIntegerList(foundList)){
 
             for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
                 String temp = String.valueOf(Long.valueOf(startEpc) + i);
                 tempList.add(temp);
             }
-            inLibraryList = archivesService.findBatchByEpcs(tempList);
-            unknowList = new ArrayList<>(foundList);
-            lostList = new ArrayList<>(inLibraryList);
+            List<String> inLibraryList = archivesService.findBatchByEpcs(tempList);
 
-            //找出未知的标签
-            for (int i = 0; i < inLibraryList.size(); i++) {
-                for (int j = 0; j < unknowList.size(); j++) {
-                    if (inLibraryList.get(i).equals(unknowList.get(j))) {
-                        unknowList.remove(j);
-                    }
-                }
-            }
 
-            //找出丢失的标签
-            for (int i = 0; i < foundList.size(); i++) {
-                for (int j = 0; j < lostList.size(); j++) {
-                    if (foundList.get(i).equals(lostList.get(j))) {
-                        lostList.remove(j);
-                    }
-                }
-            }
+
         }else {
             return ResultVo.fail(ResultCode.PARAMETER);
         }
