@@ -1,4 +1,4 @@
-package com.jeesite.modules.common;
+package com.jeesite.modules.socket;
 
 import org.springframework.web.multipart.MultipartFile;
 
