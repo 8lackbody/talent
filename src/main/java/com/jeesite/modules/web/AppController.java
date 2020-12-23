@@ -7,6 +7,7 @@ import com.jeesite.modules.result.ResultCode;
 import com.jeesite.modules.result.ResultVo;
 import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.WarehouseService;
+import com.jeesite.modules.socket.IsNumeric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * appController
+ * AppController
  *
  * @author zht
  * @version 2020-12-15
@@ -30,7 +31,7 @@ public class AppController {
 
     @Autowired
     WarehouseService warehouseService;
-    ArchivesService archivesServicel;
+    ArchivesService archivesService;
 
     /**
      * 查询列表
@@ -62,36 +63,27 @@ public class AppController {
     @RequestMapping(value = "inventoryCheck")
     @ResponseBody
     public ResultVo inventoryCheck(@RequestBody InventoryCheckForm inventoryCheckForm) {
+
         String startEpc = inventoryCheckForm.getStartEpc();
         String endEpc = inventoryCheckForm.getEndEpc();
         List<String> foundList = inventoryCheckForm.getFound();
-        List<String> inLibraryList = new ArrayList<>();
-        for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
-            String temp = String.valueOf(Long.valueOf(startEpc) + i);
-            String name = archivesServicel.getNameByEpc(temp);
-            if (name != null) {
-                inLibraryList.add(temp);
-            }
-        }
+        List<String> tempList = new ArrayList<>();
+        List<String> unknowList;
+        List<String> lostList;
 
-        //找出未知的标签
-        List<String> unknowList = new ArrayList<>(foundList);
-        for (int i = 0; i < inLibraryList.size(); i++) {
-            for (int j = 0; j < unknowList.size(); j++) {
-                if (inLibraryList.get(i).equals(unknowList.get(j))) {
-                    unknowList.remove(j);
-                }
-            }
-        }
+        //判断入参不为空且都为整数
+        if (IsNumeric.isInteger(startEpc) && IsNumeric.isInteger(endEpc) && IsNumeric.isIntegerList(foundList)){
 
-        //找出丢失的标签
-        List<String> lostList = new ArrayList<>(inLibraryList);
-        for (int i = 0; i < foundList.size(); i++) {
-            for (int j = 0; j < lostList.size(); j++) {
-                if (foundList.get(i).equals(lostList.get(j))) {
-                    lostList.remove(j);
-                }
+            for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
+                String temp = String.valueOf(Long.valueOf(startEpc) + i);
+                tempList.add(temp);
             }
+            List<String> inLibraryList = archivesService.findBatchByEpcs(tempList);
+
+
+
+        }else {
+            return ResultVo.fail(ResultCode.PARAMETER);
         }
 
         Map<String, List<String>> map = new HashMap<String, List<String>>();

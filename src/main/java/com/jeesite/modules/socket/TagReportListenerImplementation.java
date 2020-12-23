@@ -1,6 +1,6 @@
 package com.jeesite.modules.socket;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.impinj.octanesdk.ImpinjReader;
 import com.impinj.octanesdk.Tag;
 import com.impinj.octanesdk.TagReport;
@@ -11,12 +11,10 @@ import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -34,10 +32,8 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private SocketServer socketServer;
 
-    @Autowired
     private RecordService recordService;
 
-    @Autowired
     private ArchivesService archivesService;
 
     public TagReportListenerImplementation(String warehouseId) {
@@ -53,7 +49,7 @@ public class TagReportListenerImplementation implements TagReportListener {
         for (Tag t : tags) {
             //判断扫描到当前标签的时间距离上次扫描到标签有无60秒
             //如果在六十秒内，算作一次扫描
-            if (!LocalDateTime.now().minusSeconds(20).isBefore(time)) {
+            if (!LocalDateTime.now().minusSeconds(60).isBefore(time)) {
                 //上次的数据存到数据库里去
                 try {
                     List<Record> list = new ArrayList<>();
@@ -78,17 +74,16 @@ public class TagReportListenerImplementation implements TagReportListener {
             String epc = t.getEpc().toString();
             EPCTag epcTag = new EPCTag(LocalDateTime.now(), epc, archivesService.getNameByEpc(epc), "未确认");
             sets.add(epcTag);
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("date", epcTag.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                jsonObject.put("epc", epcTag.getEpc());
-                jsonObject.put("name", epcTag.getName());
-                jsonObject.put("status", "未确认");
-                socketServer.push(jsonObject.toJSONString(), "zht");
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //TODO 需要判断一下，间隔半秒发送一次消息
         }
     }
+
+    /**
+     * 发送数据到广告机
+     */
+    public void sendData() throws IOException {
+        socketServer.push(JSON.toJSONString(sets), warehouseId);
+    }
+
 }

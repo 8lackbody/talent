@@ -11,5 +11,17 @@
 		</where>
 		ORDER BY ${sqlMap.order.toSql()}
 	</select> -->
+
+	<select id="findBatchByEpcs" parameterType="java.util.List" resultType="String">
+		select
+		epc
+		from
+		archives
+		where epc in
+		<foreach collection="epcs" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and status = '0'
+	</select>
 	
 </mapper>

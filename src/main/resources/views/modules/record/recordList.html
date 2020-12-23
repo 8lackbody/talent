@@ -18,20 +18,15 @@
             </div>
         </div>
         <div class="box-body">
-            <#form:form id="searchForm" model="${record}" action="${ctx}/record/record/listData" method="post"
-            class="form-inline hide"
-            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}"
-            data-order-by="${parameter.orderBy}">
+            <#form:form id="searchForm" model="${record}" action="${ctx}/record/record/listData" method="post" class="form-inline hide"
+            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
             <div class="form-group">
                 <label class="control-label">${text('检测时间')}：</label>
                 <div class="control-inline">
-                    <#form:input path="recordTime_gte" readonly="true" maxlength="20" class="form-control laydate
-                    width-datetime"
-                    dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"
-                    data-done="recordTime_lte.click()"/>
+                    <#form:input path="recordTime_gte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
+                    dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm" data-done="recordTime_lte.click()"/>
                     &nbsp;-&nbsp;
-                    <#form:input path="recordTime_lte" readonly="true" maxlength="20" class="form-control laydate
-                    width-datetime"
+                    <#form:input path="recordTime_lte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
                     dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"/>
                 </div>
             </div>
@@ -58,8 +53,7 @@
                 <button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
                 <button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
             </div>
-        </
-        #form:form>
+        </#form:form>
         <table id="dataGrid"></table>
         <div id="dataGridPage"></div>
     </div>
@@ -93,47 +87,23 @@
     $('#dataGrid').dataGrid({
         searchForm: $("#searchForm"),
         columnModel: [
-            {
-                header: '${text("检测时间")}',
-                name: 'recordTime',
-                index: 'a.record_time',
-                width: 150,
-                align: "left",
-                frozen: true
-            },
-            {header: '${text("标签号")}', name: 'epc', index: 'a.epc', width: 150, align: "left"},
-            {header: '${text("姓名")}', name: 'name', index: 'a.name', width: 150, align: "left"},
-            {
-                header: '${text("仓库名")}',
-                name: 'warehouseId',
-                index: 'a.warehouse_id',
-                width: 150,
-                align: "center",
-                formatter: function (val, obj, row, act) {
-                    return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')}, val, '${text("未知")}', true);
-                }
-            },
-            {
-                header: '${text("操作")}',
-                name: 'actions',
-                width: 120,
-                sortable: false,
-                title: false,
-                formatter: function (val, obj, row, act) {
+            {header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"left", frozen:true},
+            {header:'${text("标签号")}', name:'epc', index:'a.epc', width:150, align:"left"},
+            {header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"left"},
+            {header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function(val, obj, row, act){
+                    return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')},val, '${text("未知")}', true);
+                }},
+            {header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
                     var actions = [];
-                <%
-                    if (hasPermi('record:record:edit')) { %>
-                        actions.push('<a href="${ctx}/record/record/form?recordId=' + row.recordId + '" class="btnList" title="${text("编辑record")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-                        actions.push('<a href="${ctx}/record/record/delete?recordId=' + row.recordId + '" class="btnList" title="${text("删除record")}" data-confirm="${text("确认要删除该record吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
-                    <%
-                    }
-                %>
+                <% if(hasPermi('record:record:edit')){ %>
+                        actions.push('<a href="${ctx}/record/record/form?recordId='+row.recordId+'" class="btnList" title="${text("编辑record")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+                        actions.push('<a href="${ctx}/record/record/delete?recordId='+row.recordId+'" class="btnList" title="${text("删除record")}" data-confirm="${text("确认要删除该record吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+                    <% } %>
                     return actions.join('');
-                }
-            }
+                }}
         ],
         // 加载成功后执行事件
-        ajaxSuccess: function (data) {
+        ajaxSuccess: function(data){
 
         }
     });

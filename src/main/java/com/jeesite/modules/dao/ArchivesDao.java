@@ -9,6 +9,8 @@ import com.jeesite.modules.entity.Archives;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * archivesDAO接口
  *
@@ -20,5 +22,7 @@ public interface ArchivesDao extends CrudDao<Archives> {
 
     @Select("SELECT `name` FROM archives WHERE epc = #{epc}")
     String getNameByEpc(@Param("epc") String epc);
+
+    List<String> findBatchByEpcs(@Param("epcs") List<String> epcs);
 
 }
