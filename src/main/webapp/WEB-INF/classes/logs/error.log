@@ -1,653 +1,898 @@
-2020-12-07 22:37:53.765 ERROR 15348 [-mapper-refresh] [com.alibaba.druid.pool.DruidDataSource ] - init datasource error, url: jdbc:mysql://127.0.0.1:3306/jeesite?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai
+2020-12-22 14:27:46.451 ERROR 10803 [nio-8980-exec-9] [o.a.c.c.C.[.[.[.[dispatcherServlet]    ] - Servlet.service() for servlet [dispatcherServlet] in context with path [/dangan] threw exception [Request processing failed; nested exception is 
+>>02:27:46:解析HTML标签出错(PARSER_HTML_TAG_ERROR):<form:input> 位于25行 资源:/modules/record/recordList.html
+错误的属性,缺少'
+22|            class="form-inline hide"
+23|            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}"
+24|            data-order-by="${parameter.orderBy}">
+25|            <div class="form-group">
+26|                <label class="control-label">${text('检测时间')}：</label>
+27|                <div class="control-inline">
+28|                    <#form:input path="recordTime_gte" readonly="true" maxlength="20" class="form-control laydate
+] with root cause
 
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
+java.lang.RuntimeException: 错误的属性,缺少'
+	at org.beetl.core.text.HTMLTagContentParser.strToken(HTMLTagContentParser.java:366)
+	at org.beetl.core.text.HTMLTagContentParser.findAttr(HTMLTagContentParser.java:235)
+	at org.beetl.core.text.HTMLTagContentParser.findAttrs(HTMLTagContentParser.java:203)
+	at org.beetl.core.text.HTMLTagContentParser.parserStart(HTMLTagContentParser.java:116)
+	at org.beetl.core.text.HTMLTagContentParser.parser(HTMLTagContentParser.java:103)
+	at org.beetl.core.text.HtmlTagStartFragment.consumeAndReturnNext(HtmlTagStartFragment.java:125)
+	at org.beetl.core.text.TextParser.scan1(TextParser.java:105)
+	at org.beetl.core.text.TextParser.doParse(TextParser.java:65)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:545)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-12-22 14:27:46.496 ERROR 10803 [nio-8980-exec-9] [error/500                              ] - 
+
+org.beetl.core.exception.BeetlException: PARSER_HTML_TAG_ERROR
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.null(eba:207)
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.processExcption(eba:111)
+	at org.beetl.core.Template.renderTo(Template.java:180)
+	at org.beetl.core.Template.renderTo(Template.java:101)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:129)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.beetl.core.exception.BeetlException: 错误的属性,缺少'
+	at org.beetl.core.text.HtmlTagStartFragment.consumeAndReturnNext(HtmlTagStartFragment.java:127)
+	at org.beetl.core.text.TextParser.scan1(TextParser.java:105)
+	at org.beetl.core.text.TextParser.doParse(TextParser.java:65)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:545)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	... 62 common frames omitted
+Caused by: java.lang.RuntimeException: 错误的属性,缺少'
+	at org.beetl.core.text.HTMLTagContentParser.strToken(HTMLTagContentParser.java:366)
+	at org.beetl.core.text.HTMLTagContentParser.findAttr(HTMLTagContentParser.java:235)
+	at org.beetl.core.text.HTMLTagContentParser.findAttrs(HTMLTagContentParser.java:203)
+	at org.beetl.core.text.HTMLTagContentParser.parserStart(HTMLTagContentParser.java:116)
+	at org.beetl.core.text.HTMLTagContentParser.parser(HTMLTagContentParser.java:103)
+	at org.beetl.core.text.HtmlTagStartFragment.consumeAndReturnNext(HtmlTagStartFragment.java:125)
+	... 68 common frames omitted
+
+2020-12-22 14:27:51.255 ERROR 10803 [io-8980-exec-10] [o.a.c.c.C.[.[.[.[dispatcherServlet]    ] - Servlet.service() for servlet [dispatcherServlet] in context with path [/dangan] threw exception [Request processing failed; nested exception is 
+>>02:27:51:缺少符号(PARSER_MISS_ERROR):>> 位于83行 资源:/modules/warehouse/warehouseList.html
+试图在第83行未找到 '{' 匹配的结束符号 '}'
+80|                    <%
+81|                    }
+82|                %>
+83|                    return actions.join('');
+84|                }
+85|            }
+86|        ],
+] with root cause
+
+org.beetl.core.exception.BeetlParserException: 试图在第83行未找到 '{' 匹配的结束符号 '}'
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.reportMissingToken(BeetlAntlrErrorStrategy.java:245)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.singleTokenInsertion(DefaultErrorStrategy.java:519)
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.recoverInline(BeetlAntlrErrorStrategy.java:202)
+	at org.antlr.v4.runtime.Parser.match(Parser.java:206)
+	at org.beetl.core.parser.BeetlParser.block(BeetlParser.java:235)
+	at org.beetl.core.parser.BeetlParser.functionTagCall(BeetlParser.java:3247)
+	at org.beetl.core.parser.BeetlParser.statement(BeetlParser.java:668)
+	at org.beetl.core.parser.BeetlParser.prog(BeetlParser.java:174)
+	at org.beetl.core.engine.DefaultTemplateEngine.createProgram(DefaultTemplateEngine.java:52)
+	at org.beetl.core.engine.FastRuntimeEngine.createProgram(FastRuntimeEngine.java:28)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:548)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-12-22 14:27:51.259 ERROR 10803 [io-8980-exec-10] [error/500                              ] - 
+
+org.beetl.core.exception.BeetlException: PARSER_MISS_ERROR
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.null(eba:207)
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.processExcption(eba:111)
+	at org.beetl.core.Template.renderTo(Template.java:180)
+	at org.beetl.core.Template.renderTo(Template.java:101)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:129)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.beetl.core.exception.BeetlParserException: 试图在第83行未找到 '{' 匹配的结束符号 '}'
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.reportMissingToken(BeetlAntlrErrorStrategy.java:245)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.singleTokenInsertion(DefaultErrorStrategy.java:519)
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.recoverInline(BeetlAntlrErrorStrategy.java:202)
+	at org.antlr.v4.runtime.Parser.match(Parser.java:206)
+	at org.beetl.core.parser.BeetlParser.block(BeetlParser.java:235)
+	at org.beetl.core.parser.BeetlParser.functionTagCall(BeetlParser.java:3247)
+	at org.beetl.core.parser.BeetlParser.statement(BeetlParser.java:668)
+	at org.beetl.core.parser.BeetlParser.prog(BeetlParser.java:174)
+	at org.beetl.core.engine.DefaultTemplateEngine.createProgram(DefaultTemplateEngine.java:52)
+	at org.beetl.core.engine.FastRuntimeEngine.createProgram(FastRuntimeEngine.java:28)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:548)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	... 62 common frames omitted
+
+2020-12-22 14:27:53.755 ERROR 10803 [nio-8980-exec-6] [o.a.c.c.C.[.[.[.[dispatcherServlet]    ] - Servlet.service() for servlet [dispatcherServlet] in context with path [/dangan] threw exception [Request processing failed; nested exception is 
+>>02:27:53:缺少符号(PARSER_MISS_ERROR):>> 位于75行 资源:/modules/archives/archivesList.html
+试图在第75行未找到 '{' 匹配的结束符号 '}'
+72|                    <%
+73|                    }
+74|                %>
+75|                    return actions.join('');
+76|                }
+77|            }
+78|        ],
+] with root cause
+
+org.beetl.core.exception.BeetlParserException: 试图在第75行未找到 '{' 匹配的结束符号 '}'
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.reportMissingToken(BeetlAntlrErrorStrategy.java:245)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.singleTokenInsertion(DefaultErrorStrategy.java:519)
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.recoverInline(BeetlAntlrErrorStrategy.java:202)
+	at org.antlr.v4.runtime.Parser.match(Parser.java:206)
+	at org.beetl.core.parser.BeetlParser.block(BeetlParser.java:235)
+	at org.beetl.core.parser.BeetlParser.functionTagCall(BeetlParser.java:3247)
+	at org.beetl.core.parser.BeetlParser.statement(BeetlParser.java:668)
+	at org.beetl.core.parser.BeetlParser.prog(BeetlParser.java:174)
+	at org.beetl.core.engine.DefaultTemplateEngine.createProgram(DefaultTemplateEngine.java:52)
+	at org.beetl.core.engine.FastRuntimeEngine.createProgram(FastRuntimeEngine.java:28)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:548)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-12-22 14:27:53.759 ERROR 10803 [nio-8980-exec-6] [error/500                              ] - 
+
+org.beetl.core.exception.BeetlException: PARSER_MISS_ERROR
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.null(eba:207)
+	at com.jeesite.common.beetl.handler.LoggerErrorHandler.processExcption(eba:111)
+	at org.beetl.core.Template.renderTo(Template.java:180)
+	at org.beetl.core.Template.renderTo(Template.java:101)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:129)
+	at org.beetl.ext.spring.BeetlSpringView.renderMergedTemplateModel(BeetlSpringView.java:123)
+	at com.jeesite.common.shiro.realms.Fg.null(eea:57)
+	at com.jeesite.common.shiro.realms.Fg.renderMergedTemplateModel(eea:18)
+	at org.springframework.web.servlet.view.AbstractTemplateView.renderMergedOutputModel(AbstractTemplateView.java:179)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:316)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.beetl.core.exception.BeetlParserException: 试图在第75行未找到 '{' 匹配的结束符号 '}'
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.reportMissingToken(BeetlAntlrErrorStrategy.java:245)
+	at org.antlr.v4.runtime.DefaultErrorStrategy.singleTokenInsertion(DefaultErrorStrategy.java:519)
+	at org.beetl.core.parser.BeetlAntlrErrorStrategy.recoverInline(BeetlAntlrErrorStrategy.java:202)
+	at org.antlr.v4.runtime.Parser.match(Parser.java:206)
+	at org.beetl.core.parser.BeetlParser.block(BeetlParser.java:235)
+	at org.beetl.core.parser.BeetlParser.functionTagCall(BeetlParser.java:3247)
+	at org.beetl.core.parser.BeetlParser.statement(BeetlParser.java:668)
+	at org.beetl.core.parser.BeetlParser.prog(BeetlParser.java:174)
+	at org.beetl.core.engine.DefaultTemplateEngine.createProgram(DefaultTemplateEngine.java:52)
+	at org.beetl.core.engine.FastRuntimeEngine.createProgram(FastRuntimeEngine.java:28)
+	at org.beetl.core.GroupTemplate.loadTemplate(GroupTemplate.java:548)
+	at org.beetl.core.GroupTemplate.getTemplateByLoader(GroupTemplate.java:501)
+	at org.beetl.core.GroupTemplate.getTemplate(GroupTemplate.java:478)
+	at org.beetl.ext.web.WebRender.render(WebRender.java:88)
+	... 62 common frames omitted
+
+2020-12-22 15:02:09.132 ERROR 11655 [nio-8980-exec-3] [o.a.c.c.C.[.[.[.[dispatcherServlet]    ] - Servlet.service() for servlet [dispatcherServlet] in context with path [/dangan] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
+### The error may exist in com/jeesite/modules/dao/WarehouseDao.java (best guess)
+### The error may involve com.jeesite.modules.dao.WarehouseDao.findList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT a.`warehouse_id` AS "warehouseId", a.`reader_ip` AS "readerIp", a.`warehouse_name` AS "warehouseName", a.`mechanism_name` AS "mechanismName" FROM `warehouse` a ORDER BY a.warehouse_id DESC LIMIT 20
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'] with root cause
+
+java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:923)
-	at com.jeesite.common.datasource.RoutingDataSource.initDruidDataSource(rh:124)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:30)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:59)
-	at com.jeesite.common.datasource.RoutingDataSourceSupport.afterPropertiesSet(uga:44)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1175)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:420)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1127)
-	at com.jeesite.common.utils.SpringUtils.getBean(um:51)
-	at com.jeesite.common.shiro.realms.ga.null(ed:13538)
-	at com.jeesite.common.shiro.realms.ga.run(ed:18535)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:960)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:388)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3461)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_execute(FilterAdapter.java:1081)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3459)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3459)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:497)
+	at sun.reflect.GeneratedMethodAccessor210.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)
+	at com.sun.proxy.$Proxy165.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)
+	at com.sun.proxy.$Proxy163.query(Unknown Source)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)
+	at com.jeesite.common.mybatis.interceptor.k.null(dw:181)
+	at com.jeesite.common.mybatis.interceptor.k.case(dw:90)
+	at com.jeesite.common.mybatis.interceptor.DataSourceInterceptor.intercept(dw:170)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)
+	at com.sun.proxy.$Proxy162.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
+	at com.sun.proxy.$Proxy103.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:223)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:152)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
+	at com.sun.proxy.$Proxy107.findList(Unknown Source)
+	at com.jeesite.common.service.QueryService.findList(un:21855)
+	at com.jeesite.common.service.QueryService.null(un:6808)
+	at com.jeesite.common.service.QueryService.findPage(un:2737)
+	at com.jeesite.modules.service.WarehouseService.findPage(WarehouseService.java:42)
+	at com.jeesite.modules.service.WarehouseService$$FastClassBySpringCGLIB$$bb95d87c.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.service.WarehouseService$$EnhancerBySpringCGLIB$$b3bb3222.findPage(<generated>)
+	at com.jeesite.modules.service.WarehouseService$$FastClassBySpringCGLIB$$bb95d87c.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.service.WarehouseService$$EnhancerBySpringCGLIB$$f97c0fe8.findPage(<generated>)
+	at com.jeesite.modules.web.WarehouseController.listData(WarehouseController.java:63)
+	at com.jeesite.modules.web.WarehouseController$$FastClassBySpringCGLIB$$83f14714.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor$1.proceed(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:82)
+	at org.apache.shiro.authz.aop.AuthorizingMethodInterceptor.invoke(AuthorizingMethodInterceptor.java:39)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor.invoke(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:115)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.web.WarehouseController$$EnhancerBySpringCGLIB$$4c08fef5.listData(<generated>)
+	at com.jeesite.modules.web.WarehouseController$$FastClassBySpringCGLIB$$83f14714.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor$1.proceed(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:82)
+	at org.apache.shiro.authz.aop.AuthorizingMethodInterceptor.invoke(AuthorizingMethodInterceptor.java:39)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor.invoke(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:115)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.web.WarehouseController$$EnhancerBySpringCGLIB$$9d14b6cb.listData(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
 
-2020-12-07 22:37:53.772 ERROR 15348 [-mapper-refresh] [com.alibaba.druid.pool.DruidDataSource ] - {dataSource-1} init error
+2020-12-22 15:02:09.156 ERROR 11655 [nio-8980-exec-3] [error/500                              ] - 
 
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
+### The error may exist in com/jeesite/modules/dao/WarehouseDao.java (best guess)
+### The error may involve com.jeesite.modules.dao.WarehouseDao.findList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT a.`warehouse_id` AS "warehouseId", a.`reader_ip` AS "readerIp", a.`warehouse_name` AS "warehouseName", a.`mechanism_name` AS "mechanismName" FROM `warehouse` a ORDER BY a.warehouse_id DESC LIMIT 20
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:88)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:440)
+	at com.sun.proxy.$Proxy103.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:223)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:152)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
+	at com.sun.proxy.$Proxy107.findList(Unknown Source)
+	at com.jeesite.common.service.QueryService.findList(un:21855)
+	at com.jeesite.common.service.QueryService.null(un:6808)
+	at com.jeesite.common.service.QueryService.findPage(un:2737)
+	at com.jeesite.modules.service.WarehouseService.findPage(WarehouseService.java:42)
+	at com.jeesite.modules.service.WarehouseService$$FastClassBySpringCGLIB$$bb95d87c.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.service.WarehouseService$$EnhancerBySpringCGLIB$$b3bb3222.findPage(<generated>)
+	at com.jeesite.modules.service.WarehouseService$$FastClassBySpringCGLIB$$bb95d87c.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.service.WarehouseService$$EnhancerBySpringCGLIB$$f97c0fe8.findPage(<generated>)
+	at com.jeesite.modules.web.WarehouseController.listData(WarehouseController.java:63)
+	at com.jeesite.modules.web.WarehouseController$$FastClassBySpringCGLIB$$83f14714.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor$1.proceed(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:82)
+	at org.apache.shiro.authz.aop.AuthorizingMethodInterceptor.invoke(AuthorizingMethodInterceptor.java:39)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor.invoke(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:115)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.web.WarehouseController$$EnhancerBySpringCGLIB$$4c08fef5.listData(<generated>)
+	at com.jeesite.modules.web.WarehouseController$$FastClassBySpringCGLIB$$83f14714.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor$1.proceed(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:82)
+	at org.apache.shiro.authz.aop.AuthorizingMethodInterceptor.invoke(AuthorizingMethodInterceptor.java:39)
+	at org.apache.shiro.spring.security.interceptor.AopAllianceAnnotationsAuthorizingMethodInterceptor.invoke(AopAllianceAnnotationsAuthorizingMethodInterceptor.java:115)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at com.jeesite.modules.web.WarehouseController$$EnhancerBySpringCGLIB$$9d14b6cb.listData(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:450)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at com.jeesite.common.shiro.web.m.null(wm:115)
+	at com.jeesite.common.shiro.web.m.doFilterInternal(wm:61)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'a.reader_ip' in 'field list'
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:923)
-	at com.jeesite.common.datasource.RoutingDataSource.initDruidDataSource(rh:124)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:30)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:59)
-	at com.jeesite.common.datasource.RoutingDataSourceSupport.afterPropertiesSet(uga:44)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1175)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:420)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1127)
-	at com.jeesite.common.utils.SpringUtils.getBean(um:51)
-	at com.jeesite.common.shiro.realms.ga.null(ed:13538)
-	at com.jeesite.common.shiro.realms.ga.run(ed:18535)
-
-2020-12-07 22:37:53.774 ERROR 15348 [-mapper-refresh] [c.j.common.datasource.RoutingDataSource] - Init data source error: default
-
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:923)
-	at com.jeesite.common.datasource.RoutingDataSource.initDruidDataSource(rh:124)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:30)
-	at com.jeesite.common.datasource.RoutingDataSource.createDataSource(rh:59)
-	at com.jeesite.common.datasource.RoutingDataSourceSupport.afterPropertiesSet(uga:44)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:884)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:538)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:227)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1175)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:420)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1127)
-	at com.jeesite.common.utils.SpringUtils.getBean(um:51)
-	at com.jeesite.common.shiro.realms.ga.null(ed:13538)
-	at com.jeesite.common.shiro.realms.ga.run(ed:18535)
-
-2020-12-07 22:37:53.777 ERROR 15348 [eate-1581658586] [com.alibaba.druid.pool.DruidDataSource ] - create connection SQLException, url: jdbc:mysql://127.0.0.1:3306/jeesite?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai, errorCode 1049, state 42000
-
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2779)
-
-2020-12-07 22:37:53.780 ERROR 15348 [eate-1581658586] [com.alibaba.druid.pool.DruidDataSource ] - create connection SQLException, url: jdbc:mysql://127.0.0.1:3306/jeesite?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai, errorCode 1049, state 42000
-
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2779)
-
-2020-12-07 22:37:54.295 ERROR 15348 [eate-1581658586] [com.alibaba.druid.pool.DruidDataSource ] - create connection SQLException, url: jdbc:mysql://127.0.0.1:3306/jeesite?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai, errorCode 1049, state 42000
-
-java.sql.SQLSyntaxErrorException: Unknown database 'jeesite'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:862)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:230)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:226)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:156)
-	at com.alibaba.druid.filter.FilterAdapter.connection_connect(FilterAdapter.java:787)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.filter.stat.StatFilter.connection_connect(StatFilter.java:218)
-	at com.alibaba.druid.filter.FilterChainImpl.connection_connect(FilterChainImpl.java:150)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1646)
-	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1710)
-	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2779)
-
-2020-12-07 22:37:54.651 ERROR 15348 [           main] [o.s.boot.SpringApplication             ] - Application run failed
-
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'testDataService': Unsatisfied dependency expressed through field 'dao'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testDataDao' defined in file [C:\Users\Administrator\Desktop\talent\src\main\webapp\WEB-INF\classes\com\jeesite\modules\test\dao\TestDataDao.class]: Cannot resolve reference to bean 'jeesiteSqlSessionFactory' while setting bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jeesiteSqlSessionFactory' defined in class path resource [com/jeesite/autoconfigure/core/MyBatisAutoConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'dataSource' is required
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:643)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1420)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
-	at com.jeesite.modules.Application.main(Application.java:20)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testDataDao' defined in file [C:\Users\Administrator\Desktop\talent\src\main\webapp\WEB-INF\classes\com\jeesite\modules\test\dao\TestDataDao.class]: Cannot resolve reference to bean 'jeesiteSqlSessionFactory' while setting bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jeesiteSqlSessionFactory' defined in class path resource [com/jeesite/autoconfigure/core/MyBatisAutoConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'dataSource' is required
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1442)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1307)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1227)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
-	... 20 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jeesiteSqlSessionFactory' defined in class path resource [com/jeesite/autoconfigure/core/MyBatisAutoConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'dataSource' is required
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
-	... 33 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Property 'dataSource' is required
-	at org.springframework.util.Assert.notNull(Assert.java:201)
-	at com.jeesite.common.mybatis.SqlSessionFactoryBean.afterPropertiesSet(jca:6168)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790)
-	... 40 common frames omitted
-
-2020-12-07 22:46:38.068 ERROR 15740 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 22:47:41.499 ERROR 12332 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 22:50:21.723 ERROR 11236 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 22:52:21.600 ERROR 16468 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 22:53:51.128 ERROR 9144 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 22:55:29.074 ERROR 13540 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 23:00:22.854 ERROR 5804 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 23:13:21.219 ERROR 4432 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 23:28:48.185 ERROR 8396 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of constructor in com.jeesite.modules.swagger.readers.operation.OperationParameterReader required a single bean, but 2 were found:
-	- com.jeesite.modules.swagger.readers.parameter.ModelAttributeParameterExpander: defined in URL [jar:file:/C:/Users/Administrator/.m2/repository/com/jeesite/jeesite-module-swagger/4.2.2-SNAPSHOT/jeesite-module-swagger-4.2.2-20201026.144113-1.jar!/com/jeesite/modules/swagger/readers/parameter/ModelAttributeParameterExpander.class]
-	- modelAttributeParameterExpander: defined in URL [jar:file:/C:/Users/Administrator/.m2/repository/com/jeesite/jeesite-module-swagger/4.2.2-SNAPSHOT/jeesite-module-swagger-4.2.2-20201026.144113-1.jar!/com/jeesite/modules/swagger/readers/parameter/ModelAttributeParameterExpander.class]
-
-
-Action:
-
-Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
-
-2020-12-07 23:33:43.384 ERROR 14624 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-07 23:35:05.932 ERROR 16516 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of constructor in com.jeesite.modules.swagger.readers.operation.OperationParameterReader required a single bean, but 2 were found:
-	- com.jeesite.modules.swagger.readers.parameter.ModelAttributeParameterExpander: defined in URL [jar:file:/C:/Users/Administrator/.m2/repository/com/jeesite/jeesite-module-swagger/4.2.2-SNAPSHOT/jeesite-module-swagger-4.2.2-20201026.144113-1.jar!/com/jeesite/modules/swagger/readers/parameter/ModelAttributeParameterExpander.class]
-	- modelAttributeParameterExpander: defined in URL [jar:file:/C:/Users/Administrator/.m2/repository/com/jeesite/jeesite-module-swagger/4.2.2-SNAPSHOT/jeesite-module-swagger-4.2.2-20201026.144113-1.jar!/com/jeesite/modules/swagger/readers/parameter/ModelAttributeParameterExpander.class]
-
-
-Action:
-
-Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
-
-2020-12-07 23:38:38.172 ERROR 15972 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-An attempt was made to call a method that does not exist. The attempt was made from the following location:
-
-    java.lang.invoke.MethodHandleNatives.resolve(Native Method)
-
-The following method did not exist:
-
-    com.google.gson.GsonBuilder.setLenient()Lcom/google/gson/GsonBuilder;
-
-The method's class, com.google.gson.GsonBuilder, is available from the following locations:
-
-    jar:file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar!/com/google/gson/GsonBuilder.class
-
-The class hierarchy was loaded from the following locations:
-
-    com.google.gson.GsonBuilder: file:/C:/Users/Administrator/Desktop/talent/lib/OctaneSDKJava-1.0.0.240-jar-with-dependencies.jar
-
-
-Action:
-
-Correct the classpath of your application so that it contains a single, compatible version of com.google.gson.GsonBuilder
-
-2020-12-18 15:06:12.471 ERROR 3638 [           main] [o.s.b.d.LoggingFailureAnalysisReporter ] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Web server failed to start. Port 8980 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 8980 or configure this application to listen on another port.
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:960)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:388)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3461)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_execute(FilterAdapter.java:1081)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3459)
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3459)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:497)
+	at sun.reflect.GeneratedMethodAccessor210.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)
+	at com.sun.proxy.$Proxy165.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)
+	at com.sun.proxy.$Proxy163.query(Unknown Source)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)
+	at com.jeesite.common.mybatis.interceptor.k.null(dw:181)
+	at com.jeesite.common.mybatis.interceptor.k.case(dw:90)
+	at com.jeesite.common.mybatis.interceptor.DataSourceInterceptor.intercept(dw:170)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)
+	at com.sun.proxy.$Proxy162.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
+	... 123 common frames omitted
 

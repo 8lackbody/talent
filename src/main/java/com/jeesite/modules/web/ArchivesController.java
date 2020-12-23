@@ -8,6 +8,7 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Archives;
 import com.jeesite.modules.service.ArchivesService;
+import com.jeesite.modules.socket.MultipartFileToFile;
 import jxl.Sheet;
 import jxl.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -104,7 +105,7 @@ public class ArchivesController extends BaseController {
     public String export(@RequestParam("file") MultipartFile file,
                          HttpServletRequest request, HttpServletResponse response) {
         System.out.println(file);
-        com.jeesite.modules.common.MultipartFileToFile multipartFileToFile = new com.jeesite.modules.common.MultipartFileToFile();
+        MultipartFileToFile multipartFileToFile = new MultipartFileToFile();
         File file1 = null;
         try {
             file1 = multipartFileToFile.multipartFileToFile(file);
