@@ -3,39 +3,30 @@ package com.jeesite.modules.socket;
 import com.impinj.octanesdk.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
-public class TagReader implements Runnable {
+public class TagReader {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String hostname = "192.168.1.100";
-    private String warehouseId = "1";
-
-    public TagReader() {
-    }
+    private String hostname;
+    private String warehouseId;
+    private ImpinjReader reader;
 
     public TagReader(String hostname, String warehouseId) {
         this.hostname = hostname;
         this.warehouseId = warehouseId;
+        this.reader = new ImpinjReader();
     }
 
-    @Override
-    public void run() {
+    public void start(){
         try {
-
-            ImpinjReader reader = new ImpinjReader();
-
+            //TODO 需要从数据库中读取设置，然后启动
             reader.connect(hostname);
             logger.info("Connecting reader success");
             Settings settings = reader.queryDefaultSettings();
-
             ReportConfig report = settings.getReport();
             report.setIncludeAntennaPortNumber(true);
             report.setMode(ReportMode.Individual);
-
             settings.setReaderMode(ReaderMode.AutoSetDenseReader);
-
             AntennaConfigGroup antennas = settings.getAntennas();
             antennas.disableAll();
             antennas.enableById(new short[]{1});
@@ -43,17 +34,22 @@ public class TagReader implements Runnable {
             antennas.getAntenna((short) 1).setIsMaxTxPower(false);
             antennas.getAntenna((short) 1).setTxPowerinDbm(20.0);
             antennas.getAntenna((short) 1).setRxSensitivityinDbm(-70);
-
             reader.setTagReportListener(new TagReportListenerImplementation(warehouseId));
-
             reader.applySettings(settings);
-
             reader.start();
-
-        } catch (OctaneSdkException ex) {
-
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
+        }catch (OctaneSdkException ex){
+            logger.debug(ex.getMessage());
+        }catch (Exception e){
+            logger.debug(e.getMessage());
         }
     }
+
+    public void stop(){
+        try {
+            reader.stop();
+        }catch (OctaneSdkException ex){
+            logger.debug(ex.getMessage());
+        }
+    }
+
 }

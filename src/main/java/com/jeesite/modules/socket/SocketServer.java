@@ -22,10 +22,9 @@ public class SocketServer implements Runnable {
     private static SocketServer instance;
 
     // 实例化一个list,用于保存所有的socket客户端
-    private static Map<String, Socket> map = new HashMap<>();
+    public static Map<String, Socket> map = new HashMap<>();
 
     ServerSocket serverSocket;
-
 
     private SocketServer() {
 
