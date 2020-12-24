@@ -3,7 +3,7 @@
  */
 package com.jeesite.modules;
 
-import com.jeesite.modules.socket.SocketServer;
+import com.jeesite.modules.other.socket.SocketServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;

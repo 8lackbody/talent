@@ -1,4 +1,4 @@
-package com.jeesite.modules.socket;
+package com.jeesite.modules.other.socket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,12 +1,13 @@
-package com.jeesite.modules.socket;
+package com.jeesite.modules.other.socket;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.impinj.octanesdk.ImpinjReader;
 import com.impinj.octanesdk.Tag;
 import com.impinj.octanesdk.TagReport;
 import com.impinj.octanesdk.TagReportListener;
 import com.jeesite.modules.entity.EPCTag;
 import com.jeesite.modules.entity.Record;
+import com.jeesite.modules.other.utils.ReaderUtil;
 import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
@@ -43,7 +44,14 @@ public class TagReportListenerImplementation implements TagReportListener {
         public void run() {
             boolean readerStatic = ReaderUtil.getReaderStatic(warehouseId);
             System.out.println(readerStatic);
-            sendData();
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("readerStatus", readerStatic);
+                jsonObject.put("tags", sets);
+                socketServer.push(jsonObject.toJSONString(), warehouseId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -76,17 +84,6 @@ public class TagReportListenerImplementation implements TagReportListener {
             String epc = t.getEpc().toString();
             EPCTag epcTag = new EPCTag(LocalDateTime.now(), epc, archivesService.getNameByEpc(epc), "未确认");
             sets.add(epcTag);
-        }
-    }
-
-    /**
-     * 发送数据到广告机
-     */
-    public void sendData() {
-        try {
-            socketServer.push(JSON.toJSONString(sets), warehouseId);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

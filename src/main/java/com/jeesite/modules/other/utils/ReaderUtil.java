@@ -1,11 +1,13 @@
-package com.jeesite.modules.socket;
+package com.jeesite.modules.other.utils;
+
+import com.jeesite.modules.other.socket.TagReader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ReaderUtil {
 
-    public static Map<String,TagReader> readers = new HashMap<>();
+    public static Map<String, TagReader> readers = new HashMap<>();
 
     public static void startReader(String hostname, String warehouseId){
         TagReader tagReader = new TagReader(hostname,warehouseId);

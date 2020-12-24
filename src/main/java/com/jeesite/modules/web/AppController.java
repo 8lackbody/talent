@@ -3,11 +3,11 @@ package com.jeesite.modules.web;
 
 import com.jeesite.modules.entity.InventoryCheckForm;
 import com.jeesite.modules.entity.Warehouse;
-import com.jeesite.modules.result.ResultCode;
-import com.jeesite.modules.result.ResultVo;
+import com.jeesite.modules.other.result.ResultCode;
+import com.jeesite.modules.other.result.ResultVo;
+import com.jeesite.modules.other.utils.IsNumeric;
 import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.WarehouseService;
-import com.jeesite.modules.socket.IsNumeric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +46,7 @@ public class AppController {
         try {
             //判断传入的参数不能为空且做ip地址正则校验
             if (androidIp != null && androidIp.matches(check)) {
-                warehouse = warehouseService.findByAndroidIp(androidIp);
+                warehouse = warehouseService.findByReaderIp(androidIp);
             } else {
                 //失败返回校验数据错误
                 return ResultVo.fail(ResultCode.PARAMETER);
@@ -89,7 +89,7 @@ public class AppController {
 
             map.put("Data", inLibraryList);
             map.put("Unknown", foundList);
-        }catch (Exception e){
+        } catch (Exception e) {
             ResultVo.fail(ResultCode.ERROR);
         }
 

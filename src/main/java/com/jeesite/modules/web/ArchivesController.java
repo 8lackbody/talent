@@ -8,7 +8,7 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Archives;
 import com.jeesite.modules.service.ArchivesService;
-import com.jeesite.modules.socket.MultipartFileToFile;
+import com.jeesite.modules.other.utils.MultipartFileToFile;
 import jxl.Sheet;
 import jxl.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
