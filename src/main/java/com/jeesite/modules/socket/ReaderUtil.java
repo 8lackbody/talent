@@ -25,4 +25,11 @@ public class ReaderUtil {
     public static void stopAllReader(){
         //TODO 关闭所有的reader
     }
+
+    public static boolean getReaderStatic(String warehouseId){
+        TagReader tagReader = readers.get(warehouseId);
+        return tagReader.getReaderStatic();
+    }
+
+
 }

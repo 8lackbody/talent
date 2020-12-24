@@ -15,9 +15,10 @@ public class TagReader {
         this.hostname = hostname;
         this.warehouseId = warehouseId;
         this.reader = new ImpinjReader();
+        connect();
     }
 
-    public void start(){
+    public void connect(){
         try {
             //TODO 需要从数据库中读取设置，然后启动
             reader.connect(hostname);
@@ -36,13 +37,13 @@ public class TagReader {
             antennas.getAntenna((short) 1).setRxSensitivityinDbm(-70);
             reader.setTagReportListener(new TagReportListenerImplementation(warehouseId));
             reader.applySettings(settings);
-            reader.start();
         }catch (OctaneSdkException ex){
             logger.debug(ex.getMessage());
         }catch (Exception e){
             logger.debug(e.getMessage());
         }
     }
+
 
     public void stop(){
         try {
@@ -51,5 +52,19 @@ public class TagReader {
             logger.debug(ex.getMessage());
         }
     }
+
+    public void start(){
+        try {
+            reader.start();
+        }catch (OctaneSdkException ex){
+            logger.debug(ex.getMessage());
+        }
+    }
+
+    public boolean getReaderStatic(){
+        reader.onKeepaliveTimeout();
+        return reader.isConnected();
+    }
+
 
 }

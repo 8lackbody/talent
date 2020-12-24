@@ -25,7 +25,7 @@ public class Application extends SpringBootServletInitializer {
         ApplicationContext run = SpringApplication.run(Application.class, args);
         SocketServer socketServer = run.getBean(SocketServer.class);
 
-        new Thread(socketServer).start();
+//        new Thread(socketServer).start();
     }
 
     @Override
