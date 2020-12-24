@@ -1,4 +1,4 @@
-package com.jeesite.modules.result;
+package com.jeesite.modules.other.result;
 
 import lombok.Getter;
 import lombok.Setter;

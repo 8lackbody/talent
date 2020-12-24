@@ -8,6 +8,7 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Warehouse;
 import com.jeesite.modules.service.WarehouseService;
+import com.jeesite.modules.socket.UpdateDictionary;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * warehouseController
@@ -94,6 +96,23 @@ public class WarehouseController extends BaseController {
     public String delete(Warehouse warehouse) {
         warehouseService.delete(warehouse);
         return renderResult(Global.TRUE, text("删除warehouse成功！"));
+    }
+
+    public void updateDictionary(){
+        List<String> idList = warehouseService.getWarehouseId();
+        List<String> nameList = warehouseService.getWarehouseName();
+
+        for (int i = 0; i < idList.size(); i++){
+            if (warehouseService.getDictionaryTag(idList.get(i)) == null){
+                String code = UpdateDictionary.createCode(warehouseService.getLastCode());
+                String nextTreeSort = UpdateDictionary.treeSortRaise(warehouseService.getLastTreeSort());
+                String nextTreeSorts = UpdateDictionary.treeSortsRaise(warehouseService.getLastTreeSorts());
+                warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
+            }else {
+                String code = warehouseService.getCodeById(idList.get(i));
+                warehouseService.updateTag(nameList.get(i),nameList.get(i),code);
+            }
+        }
     }
 
 }

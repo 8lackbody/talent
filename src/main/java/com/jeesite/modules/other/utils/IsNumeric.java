@@ -1,4 +1,4 @@
-package com.jeesite.modules.socket;
+package com.jeesite.modules.other.utils;
 
 import java.util.List;
 import java.util.regex.Pattern;
