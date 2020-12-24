@@ -31,6 +31,8 @@ public class AppController {
 
     @Autowired
     WarehouseService warehouseService;
+
+    @Autowired
     ArchivesService archivesService;
 
     /**
@@ -67,28 +69,29 @@ public class AppController {
         String startEpc = inventoryCheckForm.getStartEpc();
         String endEpc = inventoryCheckForm.getEndEpc();
         List<String> foundList = inventoryCheckForm.getFound();
-        List<String> tempList = new ArrayList<>();
-        List<String> unknowList;
-        List<String> lostList;
-
         //判断入参不为空且都为整数
-        if (IsNumeric.isInteger(startEpc) && IsNumeric.isInteger(endEpc) && IsNumeric.isIntegerList(foundList)){
-
-            for (Long i = Long.valueOf("0"); i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
-                String temp = String.valueOf(Long.valueOf(startEpc) + i);
-                tempList.add(temp);
-            }
-            List<String> inLibraryList = archivesService.findBatchByEpcs(tempList);
-
-
-
-        }else {
+        if (IsNumeric.isInteger(startEpc) || IsNumeric.isInteger(endEpc) || IsNumeric.isIntegerList(foundList)) {
             return ResultVo.fail(ResultCode.PARAMETER);
         }
 
-        Map<String, List<String>> map = new HashMap<String, List<String>>();
-        map.put("Data", lostList);
-        map.put("Unknow", unknowList);
+        Map<String, List<String>> map = new HashMap<>();
+        List<String> tempList = new ArrayList<>();
+        List<String> index = new ArrayList<>(foundList);
+
+        try {
+            for (Long i = 0L; i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
+                tempList.add(String.valueOf(Long.valueOf(startEpc) + i));
+            }
+            List<String> inLibraryList = archivesService.findBatchByEpcs(tempList);
+
+            foundList.removeAll(inLibraryList);
+            inLibraryList.removeAll(index);
+
+            map.put("Data", inLibraryList);
+            map.put("Unknown", foundList);
+        }catch (Exception e){
+            ResultVo.fail(ResultCode.ERROR);
+        }
 
         return ResultVo.ok().put(map);
     }
