@@ -47,12 +47,12 @@ public class ReaderUtil {
         readers.forEach((s, tagReader) -> tagReader.stop());
     }
 
-    public static boolean getReaderStatic(String warehouseId) {
+    public static boolean getReaderStatus(String warehouseId) {
         TagReader tagReader = readers.get(warehouseId);
         if (tagReader == null) {
             return false;
         }
-        return tagReader.getReaderStatic();
+        return tagReader.getReaderStatus();
     }
 
 
