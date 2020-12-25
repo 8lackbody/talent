@@ -4,6 +4,7 @@
 package com.jeesite.modules;
 
 import com.jeesite.modules.other.socket.SocketServer;
+import com.jeesite.modules.other.utils.ReaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
@@ -26,6 +27,7 @@ public class Application extends SpringBootServletInitializer {
         SocketServer socketServer = run.getBean(SocketServer.class);
 
 //        new Thread(socketServer).start();
+        ReaderUtil.startAllReader();
     }
 
     @Override

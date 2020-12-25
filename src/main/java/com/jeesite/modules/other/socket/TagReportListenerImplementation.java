@@ -13,8 +13,9 @@ import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -36,17 +37,20 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private ArchivesService archivesService;
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-dd HH:mm:ss");
+
+
     Timer timer = new Timer();
 
     // 心跳 发送广告机对应reader状态和读取到的数据的set
     TimerTask heartBeat = new TimerTask() {
         @Override
         public void run() {
-            boolean readerStatic = ReaderUtil.getReaderStatic(warehouseId);
-            System.out.println(readerStatic);
+            boolean readerStatus = ReaderUtil.getReaderStatus(warehouseId);
+            System.out.println(readerStatus);
             try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("readerStatus", readerStatic);
+                jsonObject.put("readerStatus", readerStatus);
                 jsonObject.put("tags", sets);
                 socketServer.push(jsonObject.toJSONString(), warehouseId);
             } catch (Exception e) {
@@ -82,7 +86,8 @@ public class TagReportListenerImplementation implements TagReportListener {
             }
             //从数据库里查出来epc的名字
             String epc = t.getEpc().toString();
-            EPCTag epcTag = new EPCTag(LocalDateTime.now(), epc, archivesService.getNameByEpc(epc), "未确认");
+            EPCTag epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
+                    , epc, archivesService.getNameByEpc(epc), "未确认");
             sets.add(epcTag);
         }
     }
@@ -97,8 +102,9 @@ public class TagReportListenerImplementation implements TagReportListener {
                 Record record = new Record();
                 record.setEpc(epcTag.getEpc());
                 record.setWarehouseId(warehouseId);
+                record.setName(epcTag.getName());
                 record.setConfirmStatus(1);
-                record.setRecordTime(Date.from(epcTag.getDate().atZone(ZoneId.systemDefault()).toInstant()));
+                record.setRecordTime(simpleDateFormat.parse(epcTag.getDate()));
                 list.add(record);
             }
             recordService.saveList(list);

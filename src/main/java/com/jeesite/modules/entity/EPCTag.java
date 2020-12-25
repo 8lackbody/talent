@@ -1,11 +1,10 @@
 package com.jeesite.modules.entity;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class EPCTag {
 
-    private LocalDateTime date;
+    private String date;
 
     private String epc;
 
@@ -13,11 +12,11 @@ public class EPCTag {
 
     private String status;
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -45,7 +44,7 @@ public class EPCTag {
         this.status = status;
     }
 
-    public EPCTag(LocalDateTime date, String epc, String name, String status) {
+    public EPCTag(String date, String epc, String name, String status) {
         this.date = date;
         this.epc = epc;
         this.name = name;

@@ -86,7 +86,7 @@ public class TagReader {
         }
     }
 
-    public boolean getReaderStatic() {
+    public boolean getReaderStatus() {
         reader.onKeepaliveTimeout();
         return reader.isConnected();
     }

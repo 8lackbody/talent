@@ -1,1 +1,0 @@
-2020-12-23 09:54:01.833 DEBUG 11655 [extShutdownHook] [com.jeesite.common.utils.SpringUtils   ] - Destroy: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@36a5cabc, started on Tue Dec 22 15:01:37 GMT+08:00 2020
