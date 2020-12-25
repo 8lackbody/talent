@@ -83,8 +83,8 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
      * @param ip
      * @return
      */
-    public Warehouse findByAndroidIp(String ip) {
-        return super.dao.findByAndroidIp(ip);
+    public Warehouse findByReaderIp(String ip) {
+        return super.dao.findByReaderIp(ip);
     }
 
     /**
