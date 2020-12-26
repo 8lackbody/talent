@@ -22,7 +22,7 @@
 		<file>${log.path}/debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
-			<maxFileSize>50MB</maxFileSize>
+			<maxFileSize>500MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
@@ -40,7 +40,7 @@
 		<file>${log.path}/error.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
-			<maxFileSize>50MB</maxFileSize>
+			<maxFileSize>500MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>

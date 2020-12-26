@@ -77,6 +77,10 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
         super.delete(warehouse);
     }
 
+    public List<Warehouse> findAll(){
+        return super.dao.findAll();
+    }
+
     /**
      * 根据安卓ip获取仓库信息
      *

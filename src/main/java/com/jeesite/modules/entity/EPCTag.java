@@ -1,7 +1,10 @@
 package com.jeesite.modules.entity;
 
+import lombok.Data;
+
 import java.util.Objects;
 
+@Data
 public class EPCTag {
 
     private String date;
@@ -12,43 +15,14 @@ public class EPCTag {
 
     private String status;
 
-    public String getDate() {
-        return date;
-    }
+    private Integer alert;
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getEpc() {
-        return epc;
-    }
-
-    public void setEpc(String epc) {
-        this.epc = epc;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public EPCTag(String date, String epc, String name, String status) {
+    public EPCTag(String date, String epc, String name, String status, Integer alert) {
         this.date = date;
         this.epc = epc;
         this.name = name;
         this.status = status;
+        this.alert = alert;
     }
 
     public EPCTag() {

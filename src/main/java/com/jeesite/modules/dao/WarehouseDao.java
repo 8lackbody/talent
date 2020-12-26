@@ -21,6 +21,9 @@ import java.util.List;
 @MyBatisDao
 public interface WarehouseDao extends CrudDao<Warehouse> {
 
+    @Select("SELECT * FROM warehouse")
+    List<Warehouse> findAll();
+
     @Select("SELECT * FROM warehouse WHERE reader_ip = #{ip}")
     Warehouse findByReaderIp(@Param("ip") String ip);
 

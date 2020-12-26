@@ -2,6 +2,7 @@ package com.jeesite.modules.other.socket;
 
 import com.impinj.octanesdk.*;
 import com.jeesite.modules.entity.Warehouse;
+import com.jeesite.modules.other.utils.SpringContextHolder;
 import com.jeesite.modules.service.WarehouseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,25 +10,18 @@ import org.slf4j.LoggerFactory;
 public class TagReader {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String hostname;
-    private String warehouseId;
     private ImpinjReader reader;
-
-    //TODO 需要给service 赋值
-    private WarehouseService warehouseService;
     private Warehouse warehouse;
 
-    public TagReader(String hostname, String warehouseId) {
-        this.hostname = hostname;
-        this.warehouseId = warehouseId;
+    public TagReader(Warehouse warehouse) {
         this.reader = new ImpinjReader();
-        warehouse = warehouseService.get(warehouseId);
+        this.warehouse = warehouse;
         connect();
     }
 
     public void connect() {
         try {
-            reader.connect(hostname);
+            reader.connect(warehouse.getReaderIp());
             logger.info(warehouse.getWarehouseName() + " Connecting reader success");
 
             Settings settings = reader.queryDefaultSettings();
@@ -57,7 +51,7 @@ public class TagReader {
                 antennas.disableById(new short[]{2});
             }
 
-            reader.setTagReportListener(new TagReportListenerImplementation(warehouseId));
+            reader.setTagReportListener(new TagReportListenerImplementation(warehouse.getWarehouseId()));
             reader.applySettings(settings);
         } catch (OctaneSdkException ex) {
             logger.error(ex.getMessage());
@@ -87,7 +81,14 @@ public class TagReader {
     }
 
     public boolean getReaderStatus() {
-        reader.onKeepaliveTimeout();
-        return reader.isConnected();
+        Status status;
+        boolean isPerforming;
+        try {
+            status = reader.queryStatus();
+            isPerforming = status.getIsSingulating();
+        }catch (Exception e){
+            return false;
+        }
+        return isPerforming;
     }
 }

@@ -8,6 +8,7 @@ import com.impinj.octanesdk.TagReportListener;
 import com.jeesite.modules.entity.EPCTag;
 import com.jeesite.modules.entity.Record;
 import com.jeesite.modules.other.utils.ReaderUtil;
+import com.jeesite.modules.other.utils.SpringContextHolder;
 import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
@@ -33,9 +34,9 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private boolean isNewRecord = true;
 
-    private RecordService recordService;
+    private RecordService recordService = SpringContextHolder.getBean(RecordService.class);
 
-    private ArchivesService archivesService;
+    private ArchivesService archivesService = SpringContextHolder.getBean(ArchivesService.class);
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-dd HH:mm:ss");
 
@@ -47,7 +48,6 @@ public class TagReportListenerImplementation implements TagReportListener {
         @Override
         public void run() {
             boolean readerStatus = ReaderUtil.getReaderStatus(warehouseId);
-            System.out.println(readerStatus);
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("readerStatus", readerStatus);
@@ -73,7 +73,7 @@ public class TagReportListenerImplementation implements TagReportListener {
         this.warehouseId = warehouseId;
         sets = new HashSet<>();
         socketServer = SocketServer.getInstance();
-        timer.schedule(heartBeat, 600000, 1000);
+        timer.schedule(heartBeat, 10000, 1000);
     }
 
     @Override
@@ -86,8 +86,9 @@ public class TagReportListenerImplementation implements TagReportListener {
             }
             //从数据库里查出来epc的名字
             String epc = t.getEpc().toString();
+            //TODO alert 状态也需要查询出来
             EPCTag epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
-                    , epc, archivesService.getNameByEpc(epc), "未确认");
+                    , epc, archivesService.getNameByEpc(epc), "未确认", 1);
             sets.add(epcTag);
         }
     }

@@ -59,9 +59,11 @@ public class SocketServer implements Runnable {
     }
 
     public void push(String text, String name) throws IOException {
-        PrintWriter pw = new PrintWriter(map.get(name).getOutputStream());
-        pw.println(text);
-        pw.flush();
+        if (map.get(name) != null) {
+            PrintWriter pw = new PrintWriter(map.get(name).getOutputStream());
+            pw.println(text);
+            pw.flush();
+        }
     }
 
 }

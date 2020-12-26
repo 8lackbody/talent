@@ -30,15 +30,14 @@ public class ReaderUtil {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TODO 这里需要引入一下service
-//                WarehouseService warehouseService = null;
-//                List<Warehouse> list = warehouseService.findList(null);
-//                for (Warehouse warehouse : list) {
-//                    TagReader tagReader = new TagReader(warehouse.getReaderIp(), warehouse.getWarehouseName());
-//                    readers.put(warehouse.getReaderIp(), tagReader);
-//
-//                    tagReader.start();
-//                }
+                WarehouseService warehouseService = SpringContextHolder.getBean(WarehouseService.class);
+                List<Warehouse> list = warehouseService.findAll();
+                for (Warehouse warehouse : list) {
+                    TagReader tagReader = new TagReader(warehouse);
+                    readers.put(warehouse.getWarehouseId(), tagReader);
+
+                    tagReader.start();
+                }
             }
         }, 10000);
     }
