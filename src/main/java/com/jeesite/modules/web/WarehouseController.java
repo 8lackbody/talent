@@ -7,6 +7,7 @@ import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Warehouse;
+import com.jeesite.modules.other.utils.ReaderUtil;
 import com.jeesite.modules.other.utils.UpdateDictionary;
 import com.jeesite.modules.service.WarehouseService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -84,6 +85,8 @@ public class WarehouseController extends BaseController {
     @ResponseBody
     public String save(@Validated Warehouse warehouse) {
         warehouseService.save(warehouse);
+        ReaderUtil.stopReader(warehouse.getWarehouseId());
+        ReaderUtil.startReader(warehouse.getWarehouseId());
         return renderResult(Global.TRUE, text("保存warehouse成功！"));
     }
 

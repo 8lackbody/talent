@@ -52,6 +52,7 @@ public class TagReportListenerImplementation implements TagReportListener {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("readerStatus", readerStatus);
                 jsonObject.put("tags", sets);
+                //TODO 这里查名字
                 socketServer.push(jsonObject.toJSONString(), warehouseId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -59,15 +60,6 @@ public class TagReportListenerImplementation implements TagReportListener {
         }
     };
 
-    // 扫描事件计时器，六十秒后保存数据
-    TimerTask saveDataTask = new TimerTask() {
-        @Override
-        public void run() {
-            saveData();
-            sets.clear();
-            isNewRecord = true;
-        }
-    };
 
     public TagReportListenerImplementation(String warehouseId) {
         this.warehouseId = warehouseId;
@@ -82,13 +74,27 @@ public class TagReportListenerImplementation implements TagReportListener {
         for (Tag t : tags) {
             if (isNewRecord) {
                 isNewRecord = false;
-                timer.schedule(saveDataTask, 60000);
+                // 扫描事件计时器，六十秒后保存数据
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        saveData();
+                        sets.clear();
+                        isNewRecord = true;
+                    }
+                }, 10000);
             }
             //从数据库里查出来epc的名字
             String epc = t.getEpc().toString();
             //TODO alert 状态也需要查询出来
-            EPCTag epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
-                    , epc, archivesService.getNameByEpc(epc), "未确认", 1);
+            EPCTag epcTag;
+            if (epc.replace(" ", "").equals("666645000004")) {
+                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
+                        , epc, "", "未确认", 1);
+            } else {
+                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
+                        , epc, "", "未确认", 0);
+            }
             sets.add(epcTag);
         }
     }

@@ -19,7 +19,6 @@ import java.util.List;
  * @version 2020-12-09
  */
 @Service
-@Transactional(readOnly = true)
 public class RecordService extends CrudService<RecordDao, Record> {
 
     /**
@@ -82,6 +81,7 @@ public class RecordService extends CrudService<RecordDao, Record> {
      *
      * @param list
      */
+    @Transactional(readOnly = false)
     public void saveList(List<Record> list) {
         super.dao.insertBatch(list);
     }

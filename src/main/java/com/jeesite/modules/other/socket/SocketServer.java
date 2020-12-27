@@ -52,6 +52,8 @@ public class SocketServer implements Runnable {
                 // 每接受一个线程，就随机生成一个一个新用户
                 logger.info(userName + " 登录成功···");
                 map.put(userName, socket);
+                System.out.println(map.size());
+                System.out.println(map.keySet());
             }
         } catch (Exception e) {
             e.printStackTrace();
