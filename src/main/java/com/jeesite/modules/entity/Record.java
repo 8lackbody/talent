@@ -20,31 +20,33 @@ import java.util.Date;
  * @author zht
  * @version 2020-12-21
  */
-@Table(name = "record", alias = "a", columns = {
-        @Column(name = "record_id", attrName = "recordId", label = "record_id", isPK = true),
-        @Column(name = "record_time", attrName = "recordTime", label = "检测时间"),
-        @Column(name = "epc", attrName = "epc", label = "检测到的标签号"),
-        @Column(name = "name", attrName = "name", label = "姓名", queryType = QueryType.LIKE),
-        @Column(name = "warehouse_id", attrName = "warehouseId", label = "哪个仓库上传的"),
-        @Column(name = "confirm_status", attrName = "confirmStatus", label = "确认状态", isUpdate = false),
-        @Column(name = "create_date", attrName = "createDate", label = "create_date", isUpdate = false, isQuery = false),
-}, orderBy = "a.record_id DESC"
+@Table(name="record", alias="a", columns={
+        @Column(name="record_id", attrName="recordId", label="record_id", isPK=true),
+        @Column(name="record_time", attrName="recordTime", label="检测时间"),
+        @Column(name="epc", attrName="epc", label="检测到的标签号"),
+        @Column(name="name", attrName="name", label="姓名", queryType=QueryType.LIKE),
+        @Column(name="warehouse_id", attrName="warehouseId", label="哪个仓库上传的"),
+        @Column(name="confirm_status", attrName="confirmStatus", label="确认状态"),
+        @Column(name="create_date", attrName="createDate", label="create_date", isUpdate=false, isQuery=false),
+        @Column(name="alarm_status", attrName="alarmStatus", label="alarm_status"),
+}, orderBy="a.record_id DESC"
 )
 public class Record extends DataEntity<Record> {
 
     private static final long serialVersionUID = 1L;
-    private String recordId;        // record_id
-    private Date recordTime;        // 检测时间
-    private String epc;        // 检测到的标签号
-    private String name;        // 姓名
-    private String warehouseId;        // 哪个仓库上传的
-    private Integer confirmStatus;        // 确认状态
+    private String recordId;		// record_id
+    private Date recordTime;		// 检测时间
+    private String epc;		// 检测到的标签号
+    private String name;		// 姓名
+    private String warehouseId;		// 哪个仓库上传的
+    private Integer confirmStatus;		// 确认状态
+    private Integer alarmStatus;		// alarm_status
 
     public Record() {
         this(null);
     }
 
-    public Record(String id) {
+    public Record(String id){
         super(id);
     }
 
@@ -57,7 +59,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @NotNull(message = "检测时间不能为空")
+    @NotNull(message="检测时间不能为空")
     public Date getRecordTime() {
         return recordTime;
     }
@@ -66,8 +68,8 @@ public class Record extends DataEntity<Record> {
         this.recordTime = recordTime;
     }
 
-    @NotBlank(message = "检测到的标签号不能为空")
-    @Length(min = 0, max = 255, message = "检测到的标签号长度不能超过 255 个字符")
+    @NotBlank(message="检测到的标签号不能为空")
+    @Length(min=0, max=255, message="检测到的标签号长度不能超过 255 个字符")
     public String getEpc() {
         return epc;
     }
@@ -76,7 +78,7 @@ public class Record extends DataEntity<Record> {
         this.epc = epc;
     }
 
-    @Length(min = 0, max = 20, message = "姓名长度不能超过 20 个字符")
+    @Length(min=0, max=20, message="姓名长度不能超过 20 个字符")
     public String getName() {
         return name;
     }
@@ -85,8 +87,8 @@ public class Record extends DataEntity<Record> {
         this.name = name;
     }
 
-    @NotBlank(message = "哪个仓库上传的不能为空")
-    @Length(min = 0, max = 11, message = "哪个仓库上传的长度不能超过 11 个字符")
+    @NotBlank(message="哪个仓库上传的不能为空")
+    @Length(min=0, max=11, message="哪个仓库上传的长度不能超过 11 个字符")
     public String getWarehouseId() {
         return warehouseId;
     }
@@ -95,13 +97,22 @@ public class Record extends DataEntity<Record> {
         this.warehouseId = warehouseId;
     }
 
-    @NotNull(message = "确认状态不能为空")
+    @NotNull(message="确认状态不能为空")
     public Integer getConfirmStatus() {
         return confirmStatus;
     }
 
     public void setConfirmStatus(Integer confirmStatus) {
         this.confirmStatus = confirmStatus;
+    }
+
+    @NotNull(message="alarm_status不能为空")
+    public Integer getAlarmStatus() {
+        return alarmStatus;
+    }
+
+    public void setAlarmStatus(Integer alarmStatus) {
+        this.alarmStatus = alarmStatus;
     }
 
     public Date getRecordTime_gte() {
@@ -120,4 +131,11 @@ public class Record extends DataEntity<Record> {
         sqlMap.getWhere().and("record_time", QueryType.LTE, recordTime);
     }
 
+    public String[] getAlarmStatus_in(){
+        return sqlMap.getWhere().getValue("alarm_status", QueryType.IN);
+    }
+
+    public void setAlarmStatus_in(String[] codes){
+        sqlMap.getWhere().and("alarm_status", QueryType.IN, codes);
+    }
 }
