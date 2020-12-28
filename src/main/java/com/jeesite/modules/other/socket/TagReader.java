@@ -2,8 +2,6 @@ package com.jeesite.modules.other.socket;
 
 import com.impinj.octanesdk.*;
 import com.jeesite.modules.entity.Warehouse;
-import com.jeesite.modules.other.utils.SpringContextHolder;
-import com.jeesite.modules.service.WarehouseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +51,8 @@ public class TagReader {
 
             reader.setTagReportListener(new TagReportListenerImplementation(warehouse.getWarehouseId()));
             reader.applySettings(settings);
+
+            reader.start();
         } catch (OctaneSdkException ex) {
             logger.error(ex.getMessage());
         } catch (Exception e) {
@@ -60,24 +60,25 @@ public class TagReader {
         }
     }
 
-
-    // TODO 各个指令在执行前需要做判断
-    public void stop() {
-        try {
-            reader.stop();
-            logger.info(warehouse.getWarehouseName() + " stop reader success");
-        } catch (OctaneSdkException ex) {
-            logger.debug(ex.getMessage());
+    public void disconnect() {
+        if (reader.isConnected()) {
+            reader.disconnect();
         }
     }
 
-    public void start() {
-        try {
-            reader.start();
-            logger.info(warehouse.getWarehouseName() + " start reader success");
-        } catch (OctaneSdkException ex) {
-            logger.error(ex.getMessage());
+
+    public void stop() {
+        if (reader.isConnected()) {
+            try {
+                reader.stop();
+            } catch (OctaneSdkException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+        public TagReportListenerImplementation getTagReportListener() {
+        return (TagReportListenerImplementation) reader.getTagReportListener();
     }
 
     public boolean getReaderStatus() {
@@ -86,7 +87,7 @@ public class TagReader {
         try {
             status = reader.queryStatus();
             isPerforming = status.getIsSingulating();
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return isPerforming;

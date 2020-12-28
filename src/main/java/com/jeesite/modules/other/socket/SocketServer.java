@@ -1,9 +1,14 @@
 package com.jeesite.modules.other.socket;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jeesite.modules.entity.EPCTag;
+import com.jeesite.modules.other.utils.ReaderUtil;
+import com.jeesite.modules.service.ArchivesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +17,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 @Component
@@ -21,13 +28,44 @@ public class SocketServer implements Runnable {
 
     private static SocketServer instance;
 
+    @Resource
+    private ArchivesService archivesService;
+
     // 实例化一个list,用于保存所有的socket客户端
     public static Map<String, Socket> map = new HashMap<>();
 
+    Timer timer = new Timer();
+
     ServerSocket serverSocket;
 
-    private SocketServer() {
+    // 心跳 发送广告机对应reader状态和读取到的数据的set
+    TimerTask heartBeat = new TimerTask() {
+        @Override
+        public void run() {
+            try {
+                for (String key : map.keySet()) {
+                    boolean readerStatus = ReaderUtil.getReaderStatus(key);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("readerStatus", readerStatus);
+                    if (readerStatus) {
+                        TagReader tagReader = ReaderUtil.readers.get(key);
+                        TagReportListenerImplementation t = tagReader.getTagReportListener();
+                        //TODO 待优化 查找名字
+                        for (EPCTag set : t.sets) {
+                            set.setName(archivesService.getNameByEpc(set.getEpc()));
+                        }
+                        jsonObject.put("tags", t.sets);
+                    }
+                    push(jsonObject.toJSONString(), key);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
+    private SocketServer() {
+        timer.schedule(heartBeat, 5000, 1000);
     }
 
     public static SocketServer getInstance() {

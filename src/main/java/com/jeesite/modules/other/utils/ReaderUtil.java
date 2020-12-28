@@ -10,17 +10,15 @@ public class ReaderUtil {
 
     public static Map<String, TagReader> readers = new HashMap<>();
 
-    public static void startReader(String warehouseId) {
-        TagReader tagReader = readers.get(warehouseId);
-        if (tagReader != null) {
-            tagReader.start();
-        }
-    }
-
-    public static void stopReader(String warehouseId) {
-        TagReader tagReader = readers.get(warehouseId);
-        if (tagReader != null) {
+    public static void restart(Warehouse warehouse) {
+        TagReader tagReader = readers.get(warehouse.getWarehouseId());
+        if (tagReader != null) {  //启动的reader
             tagReader.stop();
+            tagReader.disconnect();
+        }
+        if (warehouse.getAntenna1Enable() == 1 || warehouse.getAntenna2Enable() == 1) {
+            tagReader = new TagReader(warehouse);
+            readers.put(warehouse.getWarehouseId(), tagReader);
         }
     }
 
@@ -33,17 +31,11 @@ public class ReaderUtil {
                 WarehouseService warehouseService = SpringContextHolder.getBean(WarehouseService.class);
                 List<Warehouse> list = warehouseService.findAll();
                 for (Warehouse warehouse : list) {
-                    TagReader tagReader = new TagReader(warehouse);
-                    readers.put(warehouse.getWarehouseId(), tagReader);
-
-                    tagReader.start();
+                    restart(warehouse);
                 }
+                System.out.println(readers.size());
             }
-        }, 10000);
-    }
-
-    public static void stopAllReader() {
-        readers.forEach((s, tagReader) -> tagReader.stop());
+        }, 3000);
     }
 
     public static boolean getReaderStatus(String warehouseId) {
@@ -53,6 +45,5 @@ public class ReaderUtil {
         }
         return tagReader.getReaderStatus();
     }
-
 
 }

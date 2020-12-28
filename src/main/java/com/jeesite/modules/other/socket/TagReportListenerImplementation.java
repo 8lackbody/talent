@@ -1,15 +1,12 @@
 package com.jeesite.modules.other.socket;
 
-import com.alibaba.fastjson.JSONObject;
 import com.impinj.octanesdk.ImpinjReader;
 import com.impinj.octanesdk.Tag;
 import com.impinj.octanesdk.TagReport;
 import com.impinj.octanesdk.TagReportListener;
 import com.jeesite.modules.entity.EPCTag;
 import com.jeesite.modules.entity.Record;
-import com.jeesite.modules.other.utils.ReaderUtil;
 import com.jeesite.modules.other.utils.SpringContextHolder;
-import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,51 +23,21 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private HashSet<EPCTag> sets;
+    HashSet<EPCTag> sets;
 
     private String warehouseId;
-
-    private SocketServer socketServer;
 
     private boolean isNewRecord = true;
 
     private RecordService recordService = SpringContextHolder.getBean(RecordService.class);
 
-    private ArchivesService archivesService = SpringContextHolder.getBean(ArchivesService.class);
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-dd HH:mm:ss");
-
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 
     Timer timer = new Timer();
-
-    // 心跳 发送广告机对应reader状态和读取到的数据的set
-    TimerTask heartBeat = new TimerTask() {
-        @Override
-        public void run() {
-            boolean readerStatus = ReaderUtil.getReaderStatus(warehouseId);
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("readerStatus", readerStatus);
-
-                //TODO 待优化 查找名字
-                for (EPCTag set : sets) {
-                    set.setName(archivesService.getNameByEpc(set.getEpc()));
-                }
-
-                jsonObject.put("tags", sets);
-                socketServer.push(jsonObject.toJSONString(), warehouseId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
 
     public TagReportListenerImplementation(String warehouseId) {
         this.warehouseId = warehouseId;
         sets = new HashSet<>();
-        socketServer = SocketServer.getInstance();
-        timer.schedule(heartBeat, 10000, 1000);
     }
 
     @Override
@@ -87,17 +54,17 @@ public class TagReportListenerImplementation implements TagReportListener {
                         sets.clear();
                         isNewRecord = true;
                     }
-                }, 10000);
+                }, 60000);
             }
             //从数据库里查出来epc的名字
             String epc = t.getEpc().toString();
             //TODO alert 状态也需要查询出来 在发送的时候查  不在这里
             EPCTag epcTag;
             if (epc.replace(" ", "").equals("666645000004")) {
-                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
+                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm"))
                         , epc, "", "未确认", 1);
             } else {
-                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))
+                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm"))
                         , epc, "", "未确认", 0);
             }
             sets.add(epcTag);
@@ -117,6 +84,7 @@ public class TagReportListenerImplementation implements TagReportListener {
                 record.setName(epcTag.getName());
                 record.setConfirmStatus(1);
                 record.setRecordTime(simpleDateFormat.parse(epcTag.getDate()));
+                record.setAlarmStatus(epcTag.getAlert());
                 list.add(record);
             }
             recordService.saveList(list);

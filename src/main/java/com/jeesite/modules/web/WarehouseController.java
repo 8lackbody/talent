@@ -85,8 +85,7 @@ public class WarehouseController extends BaseController {
     @ResponseBody
     public String save(@Validated Warehouse warehouse) {
         warehouseService.save(warehouse);
-        ReaderUtil.stopReader(warehouse.getWarehouseId());
-        ReaderUtil.startReader(warehouse.getWarehouseId());
+        ReaderUtil.restart(warehouse);
         return renderResult(Global.TRUE, text("保存warehouse成功！"));
     }
 
