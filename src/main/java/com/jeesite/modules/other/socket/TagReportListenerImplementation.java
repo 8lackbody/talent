@@ -51,8 +51,13 @@ public class TagReportListenerImplementation implements TagReportListener {
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("readerStatus", readerStatus);
+
+                //TODO 待优化 查找名字
+                for (EPCTag set : sets) {
+                    set.setName(archivesService.getNameByEpc(set.getEpc()));
+                }
+
                 jsonObject.put("tags", sets);
-                //TODO 这里查名字
                 socketServer.push(jsonObject.toJSONString(), warehouseId);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,7 +91,7 @@ public class TagReportListenerImplementation implements TagReportListener {
             }
             //从数据库里查出来epc的名字
             String epc = t.getEpc().toString();
-            //TODO alert 状态也需要查询出来
+            //TODO alert 状态也需要查询出来 在发送的时候查  不在这里
             EPCTag epcTag;
             if (epc.replace(" ", "").equals("666645000004")) {
                 epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY-MM-dd HH:mm:ss"))

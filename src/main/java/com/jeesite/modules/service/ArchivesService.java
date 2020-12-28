@@ -7,10 +7,12 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.service.CrudService;
 import com.jeesite.modules.dao.ArchivesDao;
 import com.jeesite.modules.entity.Archives;
+import com.jeesite.modules.entity.EPCTag;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * archivesService
@@ -96,5 +98,8 @@ public class ArchivesService extends CrudService<ArchivesDao, Archives> {
         return super.dao.findBatchByEpcs(epcs);
     }
 
+    public List<String> findListBySets(Set<EPCTag> sets){
+        return null;
+    }
 
 }
