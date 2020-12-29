@@ -5,10 +5,11 @@ package com.jeesite.modules.web;
 
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
+import com.jeesite.common.lang.StringUtils;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Archives;
-import com.jeesite.modules.service.ArchivesService;
 import com.jeesite.modules.other.utils.MultipartFileToFile;
+import com.jeesite.modules.service.ArchivesService;
 import jxl.Sheet;
 import jxl.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,7 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * archivesController
@@ -101,41 +103,63 @@ public class ArchivesController extends BaseController {
     /**
      * excel导入数据库
      */
+    @RequiresPermissions("archives:archives:edit")
     @RequestMapping(value = "export")
-    public String export(@RequestParam("file") MultipartFile file,
-                         HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(file);
-        MultipartFileToFile multipartFileToFile = new MultipartFileToFile();
-        File file1 = null;
-        try {
-            file1 = multipartFileToFile.multipartFileToFile(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Workbook rwb = Workbook.getWorkbook(file1);
-            Sheet rs = rwb.getSheet(0);//或者rwb.getSheet(0)
-            int clos = rs.getColumns();//得到所有的列
-            int rows = rs.getRows();//得到所有的行
+    @ResponseBody
+    public String export(@RequestParam("file") MultipartFile file) {
 
-            System.out.println(clos + " rows:" + rows);
-            for (int i = 1; i < rows; i++) {
-                for (int j = 0; j < clos; j++) {
-                    //第一个是列数，第二个是行数
-                    String epc = rs.getCell(j++, i).getContents();
-                    String name = rs.getCell(j++, i).getContents();
-                    String cardId = rs.getCell(j++, i).getContents();
-                    Archives archives = new Archives();
-                    archives.setEpc(epc);
-                    archives.setName(name);
-                    archives.setCardId(cardId);
-                    archivesService.save(archives);
-                }
-            }
+        List<Integer> list = new ArrayList<>();
+
+        Workbook rwb;
+        try {
+            rwb = Workbook.getWorkbook(MultipartFileToFile.multipartFileToFile(file));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            return renderResult(Global.FALSE, text("文件格式接收出错，请检查格式！"));
         }
-        return "modules/archives/archivesList";
+
+        Sheet rs = rwb.getSheet(0);//或者rwb.getSheet(0)
+        int clos = rs.getColumns();//得到所有的列
+        int rows = rs.getRows();//得到所有的行
+
+        if (clos != 3) {
+            return renderResult(Global.FALSE, text("文件格式接收出错，请检查格式！"));
+        }
+
+        for (int i = 1; i < rows; i++) {
+            int j = 0;
+            Archives archives = new Archives();
+            //第一个是列数，第二个是行数
+            String epc = rs.getCell(j++, i).getContents();
+            if (StringUtils.isNotBlank(epc)) {
+                archives.setEpc(epc);
+            } else {
+                logger.error("导入单个标签出错，第" + i + "行，epc为空");
+                list.add(i);
+                continue;
+            }
+
+            String name = rs.getCell(j++, i).getContents();
+            if (StringUtils.isNotBlank(name)) {
+                archives.setName(name);
+            }
+
+            String cardId = rs.getCell(j++, i).getContents();
+            if (StringUtils.isNotBlank(cardId)) {
+                archives.setCardId(cardId);
+            }
+
+            try {
+                archivesService.save(archives);
+            } catch (Exception e) {
+                list.add(i);
+                logger.error("导入单个标签出错，第" + i + "行，epc：" + epc);
+            }
+        }
+
+        if (list.size() == 0) {
+            return renderResult(Global.TRUE, text("导入标签成功！共导入" + (rows - list.size()) + "条信息"));
+        } else {
+            return renderResult(Global.TRUE, text("导入标签成功！共导入" + (rows - list.size()) + "条信息," + list.toString() + "行导入失败！"));
+        }
     }
 }

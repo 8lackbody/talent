@@ -75,18 +75,31 @@
         var name = $("#articleImageFile").val();
         formData.append("file",$("#articleImageFile")[0].files[0]);
         formData.append("name",name);//这个地方可以传递多个参数
-        $.ajax({
-            url :  "${ctx}/archives/archives/export",
-            type : 'POST',
-            async : true,
-            data : formData,
-            // 告诉jQuery不要去处理发送的数据
-            processData : false,
-            // 告诉jQuery不要去设置Content-Type请求头
-            contentType : false,
-            successfunc:function(){
 
-            }
-        });
+        if (name != "") {
+            $.ajax({
+                url: "${ctx}/archives/archives/export",
+                type: 'POST',
+                async: true,
+                data: formData,
+                dataType: "json",
+                // 告诉jQuery不要去处理发送的数据
+                processData: false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                success: function (data) {
+                    if (data.result == "true") {
+                        js.showMessage(data.message, "导入成功", "success", 600000);
+                    } else {
+                        js.showMessage(data.message, "导入失败", "error", 5000);
+                    }
+                    $("#articleImageFile").val("");
+                }
+            });
+            js.showMessage("请稍后", "正在导入", "info", 3000);
+        } else {
+            js.showMessage("请选择导入文件", "警告", "warning", 3000);
+        }
+
     });
 </script>
