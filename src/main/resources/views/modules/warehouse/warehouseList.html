@@ -1,9 +1,9 @@
-<% layout('/layouts/default.html', {title: 'warehouse管理', libs: ['dataGrid']}){ %>
+<% layout('/layouts/default.html', {title: '仓库天线管理', libs: ['dataGrid']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('warehouse管理')}
+				<i class="fa icon-notebook"></i> ${text('仓库天线管理')}
 			</div>
 			<div class="box-tools pull-right">
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
@@ -17,7 +17,7 @@
 			<#form:form id="searchForm" model="${warehouse}" action="${ctx}/warehouse/warehouse/listData" method="post" class="form-inline hide"
 					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
 				<div class="form-group">
-					<label class="control-label">${text('广告机IP地址')}：</label>
+					<label class="control-label">${text('Reader IP')}：</label>
 					<div class="control-inline">
 						<#form:input path="readerIp" maxlength="20" class="form-control width-120"/>
 					</div>
@@ -35,13 +35,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('天线一开关 1开0关')}：</label>
+					<label class="control-label">${text('天线一开关')}：</label>
 					<div class="control-inline width-120">
 						<#form:select path="antenna1Enable" dictType="sys_yes_no" blankOption="true" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('天线二开关 1开0关')}：</label>
+					<label class="control-label">${text('天线二开关')}：</label>
 					<div class="control-inline width-120">
 						<#form:select path="antenna2Enable" dictType="sys_yes_no" blankOption="true" class="form-control"/>
 					</div>
@@ -86,34 +86,32 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("广告机IP地址")}', name:'readerIp', index:'a.reader_ip', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" data-title="${text("编辑warehouse")}">'+(val||row.id)+'</a>';
-		}},
-		{header:'${text("仓库名字")}', name:'warehouseName', index:'a.warehouse_name', width:150, align:"left"},
-		{header:'${text("机构名称")}', name:'mechanismName', index:'a.mechanism_name', width:150, align:"left"},
-		{header:'${text("天线一开关 1开0关")}', name:'antenna1Enable', index:'a.antenna1_enable', width:150, align:"center", formatter: function(val, obj, row, act){
+		{header:'${text("Reader IP")}', name:'readerIp', index:'a.reader_ip', width:150, align:"center", frozen:true},
+		{header:'${text("仓库名字")}', name:'warehouseName', index:'a.warehouse_name', width:150, align:"center"},
+		{header:'${text("机构名称")}', name:'mechanismName', index:'a.mechanism_name', width:150, align:"center"},
+		{header:'${text("天线一开关")}', name:'antenna1Enable', index:'a.antenna1_enable', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('sys_yes_no')}, val, '${text("未知")}', true);
 		}},
-		{header:'${text("天线二开关 1开0关")}', name:'antenna2Enable', index:'a.antenna2_enable', width:150, align:"center", formatter: function(val, obj, row, act){
+		{header:'${text("天线二开关")}', name:'antenna2Enable', index:'a.antenna2_enable', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('sys_yes_no')}, val, '${text("未知")}', true);
 		}},
-		{header:'${text("天线一功率")}', name:'antenna1Power', index:'a.antenna1_power', width:150, align:"right", formatter: function(val, obj, row, act){
+		{header:'${text("天线一功率")}', name:'antenna1Power', index:'a.antenna1_power', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
 		}},
-		{header:'${text("天线二功率")}', name:'antenna2Power', index:'a.antenna2_power', width:150, align:"right", formatter: function(val, obj, row, act){
+		{header:'${text("天线二功率")}', name:'antenna2Power', index:'a.antenna2_power', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
 		}},
-		{header:'${text("天线一灵敏度")}', name:'antenna1Sensitivity', index:'a.antenna1_sensitivity', width:150, align:"right", formatter: function(val, obj, row, act){
+		{header:'${text("天线一灵敏度")}', name:'antenna1Sensitivity', index:'a.antenna1_sensitivity', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
 		}},
-		{header:'${text("天线二灵敏度")}', name:'antenna2Sensitivity', index:'a.antenna2_sensitivity', width:150, align:"right", formatter: function(val, obj, row, act){
+		{header:'${text("天线二灵敏度")}', name:'antenna2Sensitivity', index:'a.antenna2_sensitivity', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
 		}},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('warehouse:warehouse:edit')){ %>
-				actions.push('<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" title="${text("编辑warehouse")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除warehouse")}" data-confirm="${text("确认要删除该warehouse吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" title="${text("编辑仓库天线")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除仓库天线")}" data-confirm="${text("确认要删除该warehouse吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}

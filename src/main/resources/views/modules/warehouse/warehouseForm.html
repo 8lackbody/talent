@@ -1,9 +1,9 @@
-<% layout('/layouts/default.html', {title: 'warehouse管理', libs: ['validate']}){ %>
+<% layout('/layouts/default.html', {title: '仓库天线管理', libs: ['validate']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
 			<div class="box-title">
-				<i class="fa icon-note"></i> ${text(warehouse.isNewRecord ? '新增warehouse' : '编辑warehouse')}
+				<i class="fa icon-note"></i> ${text(warehouse.isNewRecord ? '新增仓库天线' : '编辑仓库天线')}
 			</div>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -17,7 +17,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required ">*</span> ${text('广告机IP地址')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('Reader IP')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="readerIp" maxlength="20" class="form-control required ipv4"/>
 							</div>
@@ -44,7 +44,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required ">*</span> ${text('天线一开关 1开0关')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('天线一开关')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:select path="antenna1Enable" dictType="sys_yes_no" class="form-control required digits" />
 							</div>
@@ -53,7 +53,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required ">*</span> ${text('天线二开关 1开0关')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('天线二开关')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:select path="antenna2Enable" dictType="sys_yes_no" class="form-control required digits" />
 							</div>
@@ -101,9 +101,9 @@
 				<div class="row">
 					<div class="col-sm-offset-2 col-sm-10">
 						<% if (hasPermi('warehouse:warehouse:edit')){ %>
-							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保存并重启')}</button>&nbsp;
 						<% } %>
-						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('取 消')}</button>
 					</div>
 				</div>
 			</div>
