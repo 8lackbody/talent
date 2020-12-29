@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  *
@@ -23,7 +24,7 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    HashSet<EPCTag> sets;
+    CopyOnWriteArraySet<EPCTag> sets;
 
     private String warehouseId;
 
@@ -37,7 +38,7 @@ public class TagReportListenerImplementation implements TagReportListener {
 
     public TagReportListenerImplementation(String warehouseId) {
         this.warehouseId = warehouseId;
-        sets = new HashSet<>();
+        sets = new CopyOnWriteArraySet<>();
     }
 
     @Override
