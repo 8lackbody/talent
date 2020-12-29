@@ -15,10 +15,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
@@ -32,7 +32,7 @@ public class SocketServer implements Runnable {
     private ArchivesService archivesService;
 
     // 实例化一个list,用于保存所有的socket客户端
-    public static Map<String, Socket> map = new HashMap<>();
+    public static Map<String, Socket> map = new ConcurrentHashMap<>();
 
     Timer timer = new Timer();
 
