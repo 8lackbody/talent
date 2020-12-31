@@ -82,7 +82,7 @@ public class RecordController extends BaseController {
     @ResponseBody
     public String save(@Validated Record record) {
         recordService.save(record);
-        return renderResult(Global.TRUE, text("保存record成功！"));
+        return renderResult(Global.TRUE, text("保存记录成功！"));
     }
 
     /**
@@ -93,7 +93,7 @@ public class RecordController extends BaseController {
     @ResponseBody
     public String delete(Record record) {
         recordService.delete(record);
-        return renderResult(Global.TRUE, text("删除record成功！"));
+        return renderResult(Global.TRUE, text("删除记录成功！"));
     }
 
 }

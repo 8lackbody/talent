@@ -85,8 +85,12 @@ public class WarehouseController extends BaseController {
     @ResponseBody
     public String save(@Validated Warehouse warehouse) {
         warehouseService.save(warehouse);
-        ReaderUtil.restart(warehouse);
-        return renderResult(Global.TRUE, text("保存warehouse成功！"));
+        boolean restart = ReaderUtil.restart(warehouse);
+        if(restart){
+            return renderResult(Global.TRUE, text("保存重启reader成功！"));
+        }else {
+            return renderResult(Global.FALSE, text("保存成功，重启reader失败！"));
+        }
     }
 
     /**
@@ -97,7 +101,7 @@ public class WarehouseController extends BaseController {
     @ResponseBody
     public String delete(Warehouse warehouse) {
         warehouseService.delete(warehouse);
-        return renderResult(Global.TRUE, text("删除warehouse成功！"));
+        return renderResult(Global.TRUE, text("删除reader设置成功！"));
     }
 
     public void updateDictionary(){

@@ -86,7 +86,7 @@ public class ArchivesController extends BaseController {
     @ResponseBody
     public String save(@Validated Archives archives) {
         archivesService.save(archives);
-        return renderResult(Global.TRUE, text("保存archives成功！"));
+        return renderResult(Global.TRUE, text("保存标签成功！"));
     }
 
     /**
@@ -97,7 +97,7 @@ public class ArchivesController extends BaseController {
     @ResponseBody
     public String delete(Archives archives) {
         archivesService.delete(archives);
-        return renderResult(Global.TRUE, text("删除archives成功！"));
+        return renderResult(Global.TRUE, text("删除标签成功！"));
     }
 
     /**
