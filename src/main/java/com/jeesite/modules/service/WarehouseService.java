@@ -92,14 +92,9 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
     }
 
     /**
-     * 获取仓库id
+     * 获取所有仓库
      */
-    public List<String> getWarehouseId(){ return super.dao.getWarehouseId(); }
-
-    /**
-     * 获取仓库name
-     */
-    public List<String> getWarehouseName(){ return super.dao.getWarehouseName(); }
+    public List<Warehouse> getAllWarehouse(){ return super.dao.getAllWarehouse(); }
 
     /**
      * 获取最后一位tree_sort
@@ -116,30 +111,6 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
      */
     public String getLastCode(){ return super.dao.getLastCode(); }
 
-    /**
-     * 根据仓库id获取字典标签
-     *
-     * @param id
-     */
-    public String getDictionaryTag(String id){ return super.dao.getDictionaryTag(id); }
-
-    /**
-     * 根据仓库id获取code
-     *
-     * @param id
-     */
-    public String getCodeById(String id){ return super.dao.getCodeByid(id); }
-    /**
-     * 更新字典标签
-     *
-     * @param treeNames
-     * @param dictLabel
-     * @param dictCode
-     *
-     */
-    @Transactional(readOnly = false)
-    public boolean updateTag(String treeNames, String dictLabel, String dictCode){ return super.dao.updateTag(treeNames,
-            dictLabel,dictCode); }
     /**
      * 新增字典标签
      *

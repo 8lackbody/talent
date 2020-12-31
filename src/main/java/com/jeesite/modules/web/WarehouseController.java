@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * warehouseController
@@ -106,8 +107,9 @@ public class WarehouseController extends BaseController {
     }
 
     public void updateDictionary(){
-        List<String> idList = warehouseService.getWarehouseId();
-        List<String> nameList = warehouseService.getWarehouseName();
+        List<Warehouse> warehouseList = warehouseService.getAllWarehouse();
+        List<String> idList = warehouseList.stream().map(Warehouse::getWarehouseId).collect(Collectors.toList());
+        List<String> nameList = warehouseList.stream().map(Warehouse::getWarehouseName).collect(Collectors.toList());
         try {
             warehouseService.deleteAllTag();
             for (int i = 0; i < idList.size(); i++){
