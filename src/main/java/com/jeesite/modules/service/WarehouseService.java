@@ -155,4 +155,10 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
     public boolean insertTag(String dictCode, String treeSort, String treeSorts, String treeNames, String dictLabel, String warehouseId){
         return super.dao.insertTag(dictCode,treeSort,treeSorts,treeNames,dictLabel,warehouseId);
     }
+
+    /**
+     * 删除所以仓库字典
+     */
+    @Transactional(readOnly = false)
+    public boolean deleteAllTag(){ return super.dao.deleteAllTag(); }
 }

@@ -85,6 +85,7 @@ public class WarehouseController extends BaseController {
     @ResponseBody
     public String save(@Validated Warehouse warehouse) {
         warehouseService.save(warehouse);
+        updateDictionary();
         boolean restart = ReaderUtil.restart(warehouse);
         if(restart){
             return renderResult(Global.TRUE, text("保存重启reader成功！"));
@@ -107,17 +108,23 @@ public class WarehouseController extends BaseController {
     public void updateDictionary(){
         List<String> idList = warehouseService.getWarehouseId();
         List<String> nameList = warehouseService.getWarehouseName();
-
-        for (int i = 0; i < idList.size(); i++){
-            if (warehouseService.getDictionaryTag(idList.get(i)) == null){
-                String code = UpdateDictionary.createCode(warehouseService.getLastCode());
-                String nextTreeSort = UpdateDictionary.treeSortRaise(warehouseService.getLastTreeSort());
-                String nextTreeSorts = UpdateDictionary.treeSortsRaise(warehouseService.getLastTreeSorts());
-                warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
-            }else {
-                String code = warehouseService.getCodeById(idList.get(i));
-                warehouseService.updateTag(nameList.get(i),nameList.get(i),code);
+        try {
+            warehouseService.deleteAllTag();
+            for (int i = 0; i < idList.size(); i++){
+                if (i == 0){
+                    String code = "1339833136263890001";
+                    String nextTreeSort = "30";
+                    String nextTreeSorts = "0000000030,";
+                    warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
+                }else {
+                    String code = UpdateDictionary.createCode(warehouseService.getLastCode());
+                    String nextTreeSort = UpdateDictionary.treeSortRaise(warehouseService.getLastTreeSort());
+                    String nextTreeSorts = UpdateDictionary.treeSortsRaise(warehouseService.getLastTreeSorts());
+                    warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
