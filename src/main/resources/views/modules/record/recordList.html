@@ -46,12 +46,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('确认状态')}：</label>
-					<div class="control-inline">
-						<#form:input path="confirmStatus" maxlength="1" class="form-control width-120"/>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label">${text('警报值')}：</label>
 					<div class="control-inline width-120">
 						<#form:select path="alarmStatus_in" dictType="alarm_status" multiple="true" blankOption="true" class="form-control"/>
@@ -101,7 +95,13 @@ $('#dataGrid').dataGrid({
 		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function (val, obj, row, act) {
 				return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')}, val, '${text("未知")}', true);
 		}},
-		{header:'${text("确认状态")}', name:'confirmStatus', index:'a.confirm_status', width:150, align:"center"},
+		{header:'${text("确认状态")}', name:'confirmStatus', index:'a.confirm_status', width:150, align:"center", formatter: function (val, obj, row, act) {
+				if(val == 1){
+					return "已确认";
+				}else {
+					return "未确认";
+				}
+			}},
 		{header:'${text("警报值")}', name:'alarmStatus', index:'a.alarm_status', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('alarm_status')}, val, '${text("未知")}', true);
 		}},
