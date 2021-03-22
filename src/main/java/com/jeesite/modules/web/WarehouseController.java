@@ -8,8 +8,9 @@ import com.jeesite.common.entity.Page;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.entity.Warehouse;
 import com.jeesite.modules.other.utils.ReaderUtil;
-import com.jeesite.modules.other.utils.UpdateDictionary;
 import com.jeesite.modules.service.WarehouseService;
+import com.jeesite.modules.sys.entity.DictData;
+import com.jeesite.modules.sys.service.DictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * warehouseController
@@ -37,6 +37,9 @@ public class WarehouseController extends BaseController {
 
     @Autowired
     private WarehouseService warehouseService;
+
+    @Autowired
+    private DictDataService dictDataService;
 
     /**
      * 获取数据
@@ -87,10 +90,15 @@ public class WarehouseController extends BaseController {
     public String save(@Validated Warehouse warehouse) {
         warehouseService.save(warehouse);
         updateDictionary();
-        boolean restart = ReaderUtil.restart(warehouse);
-        if(restart){
-            return renderResult(Global.TRUE, text("保存重启reader成功！"));
-        }else {
+        try {
+            boolean restart = ReaderUtil.restart(warehouse);
+            if (restart) {
+                return renderResult(Global.TRUE, text("保存重启reader成功！"));
+            } else {
+                return renderResult(Global.FALSE, text("保存成功，重启reader失败！"));
+            }
+        }catch (Exception e){
+            logger.info(e.getMessage());
             return renderResult(Global.FALSE, text("保存成功，重启reader失败！"));
         }
     }
@@ -106,26 +114,22 @@ public class WarehouseController extends BaseController {
         return renderResult(Global.TRUE, text("删除reader设置成功！"));
     }
 
-    public void updateDictionary(){
+    public void updateDictionary() {
         List<Warehouse> warehouseList = warehouseService.getAllWarehouse();
-        List<String> idList = warehouseList.stream().map(Warehouse::getWarehouseId).collect(Collectors.toList());
-        List<String> nameList = warehouseList.stream().map(Warehouse::getWarehouseName).collect(Collectors.toList());
         try {
-            warehouseService.deleteAllTag();
-            for (int i = 0; i < idList.size(); i++){
-                if (i == 0){
-                    String code = "1339833136263890001";
-                    String nextTreeSort = "30";
-                    String nextTreeSorts = "0000000030,";
-                    warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
-                }else {
-                    String code = UpdateDictionary.createCode(warehouseService.getLastCode());
-                    String nextTreeSort = UpdateDictionary.treeSortRaise(warehouseService.getLastTreeSort());
-                    String nextTreeSorts = UpdateDictionary.treeSortsRaise(warehouseService.getLastTreeSorts());
-                    warehouseService.insertTag(code,nextTreeSort,nextTreeSorts,nameList.get(i),nameList.get(i),idList.get(i));
-                }
+            dictDataService.deleteByDictType("warehouse_name");
+            int treeSort = 30;
+            for (Warehouse warehouse : warehouseList) {
+                DictData dictData = new DictData();
+                dictData.setDictType("warehouse_name");
+                dictData.setDictValue(warehouse.getId());
+                dictData.setDictLabelOrig(warehouse.getWarehouseName());
+                dictData.setIsSys("0");
+                dictData.setTreeSort(treeSort);
+                dictDataService.save(dictData);
+                treeSort += 30;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

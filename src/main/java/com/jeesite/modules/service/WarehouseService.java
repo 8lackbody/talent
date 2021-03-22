@@ -96,40 +96,4 @@ public class WarehouseService extends CrudService<WarehouseDao, Warehouse> {
      */
     public List<Warehouse> getAllWarehouse(){ return super.dao.getAllWarehouse(); }
 
-    /**
-     * 获取最后一位tree_sort
-     */
-    public String getLastTreeSort(){ return super.dao.getLastTreeSort(); }
-
-    /**
-     * 获取最后一位tree_sorts
-     */
-    public String getLastTreeSorts(){ return super.dao.getLastTreeSorts(); }
-
-    /**
-     * 获取最后一位code
-     */
-    public String getLastCode(){ return super.dao.getLastCode(); }
-
-    /**
-     * 新增字典标签
-     *
-     * @param dictCode
-     * @param treeSort
-     * @param treeSorts
-     * @param treeNames
-     * @param dictLabel
-     * @param warehouseId
-     *
-     */
-    @Transactional(readOnly = false)
-    public boolean insertTag(String dictCode, String treeSort, String treeSorts, String treeNames, String dictLabel, String warehouseId){
-        return super.dao.insertTag(dictCode,treeSort,treeSorts,treeNames,dictLabel,warehouseId);
-    }
-
-    /**
-     * 删除所以仓库字典
-     */
-    @Transactional(readOnly = false)
-    public boolean deleteAllTag(){ return super.dao.deleteAllTag(); }
 }

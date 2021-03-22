@@ -51,8 +51,8 @@ public class SocketServer implements Runnable {
                         TagReader tagReader = ReaderUtil.readers.get(key);
                         TagReportListenerImplementation t = tagReader.getTagReportListener();
                         //TODO 待优化 查找名字
-                        for (EPCTag set : t.sets) {
-                            set.setName(archivesService.getNameByEpc(set.getEpc()));
+                        for (EPCTag epcTag : t.sets) {
+                            epcTag.setName(archivesService.getNameByEpc(epcTag.getEpc()));
                         }
                         jsonObject.put("tags", t.sets);
                     }

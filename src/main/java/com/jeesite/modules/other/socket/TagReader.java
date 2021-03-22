@@ -49,6 +49,19 @@ public class TagReader {
         }
 
         reader.setTagReportListener(new TagReportListenerImplementation(warehouse.getWarehouseId()));
+
+        reader.setConnectionLostListener(impinjReader -> {
+
+        });
+
+        reader.setConnectionCloseListener((impinjReader, connectionCloseEvent) -> {
+
+        });
+
+        reader.setReaderStartListener((impinjReader, readerStartEvent) -> {
+
+        });
+
         reader.applySettings(settings);
 
         reader.start();

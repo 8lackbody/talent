@@ -41,7 +41,7 @@ public class ReaderUtil {
                     restart(warehouse);
                 }
             }
-        }, 3000);
+        }, 30000);
     }
 
     public static boolean getReaderStatus(String warehouseId) {
