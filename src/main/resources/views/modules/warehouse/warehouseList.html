@@ -65,12 +65,6 @@ $('#dataGrid').dataGrid({
 		{header:'${text("天线二功率")}', name:'antenna2Power', index:'a.antenna2_power', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
 		}},
-		{header:'${text("天线一灵敏度")}', name:'antenna1Sensitivity', index:'a.antenna1_sensitivity', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
-		}},
-		{header:'${text("天线二灵敏度")}', name:'antenna2Sensitivity', index:'a.antenna2_sensitivity', width:150, align:"center", formatter: function(val, obj, row, act){
-			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
-		}},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('warehouse:warehouse:edit')){ %>

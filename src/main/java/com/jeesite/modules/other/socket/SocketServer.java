@@ -55,6 +55,8 @@ public class SocketServer implements Runnable {
                             epcTag.setName(archivesService.getNameByEpc(epcTag.getEpc()));
                         }
                         jsonObject.put("tags", t.sets);
+                    }else {
+                        ReaderUtil.readers.remove(key);
                     }
                     push(jsonObject.toJSONString(), key);
                 }

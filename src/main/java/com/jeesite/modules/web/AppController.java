@@ -79,8 +79,8 @@ public class AppController {
         List<String> index = new ArrayList<>(foundList);
 
         try {
-            for (Long i = 0L; i < (Long.valueOf(endEpc) - Long.valueOf(startEpc) + 1); i++) {
-                tempList.add(String.valueOf(Long.valueOf(startEpc) + i));
+            for (long i = 0L; i < (Long.parseLong(endEpc) - Long.parseLong(startEpc) + 1); i++) {
+                tempList.add(String.valueOf(Long.parseLong(startEpc) + i));
             }
             List<String> inLibraryList = archivesService.findBatchByEpcs(tempList);
 
