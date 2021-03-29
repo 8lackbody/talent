@@ -48,11 +48,13 @@ public class TagReader {
             antennas.disableById(new short[]{2});
         }
 
-        reader.setTagReportListener(new TagReportListenerImplementation(warehouse.getWarehouseId()));
 
-        reader.setConnectionLostListener(impinjReader -> {
+        reader.setKeepaliveListener((impinjReader, keepaliveEvent) -> {
 
         });
+
+
+        reader.setTagReportListener(new TagReportListenerImplementation(warehouse.getWarehouseId()));
 
         reader.setConnectionCloseListener((impinjReader, connectionCloseEvent) -> {
 
@@ -94,7 +96,6 @@ public class TagReader {
         boolean isPerforming;
         try {
             status = reader.queryStatus();
-            //TODO 判断一下是什么状态
             isPerforming = status.getIsSingulating();
         } catch (Exception e) {
             return false;

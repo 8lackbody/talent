@@ -53,26 +53,30 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- 文件管理共享（个人版）
-        <dependency>
-            <groupId>com.jeesite</groupId>
-            <artifactId>jeesite-module-filemanager</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency> -->
-
-        <!-- 文件在线预览（个人版）
-        <dependency>
-            <groupId>com.jeesite</groupId>
-            <artifactId>jeesite-module-filepreview</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency> -->
-
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- netty-socketio-->
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>1.7.13</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver</artifactId>
+            <version>4.1.15.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
 
 
         <!-- 自定义jar依赖包演示
