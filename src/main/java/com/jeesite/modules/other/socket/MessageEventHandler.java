@@ -1,18 +1,16 @@
 package com.jeesite.modules.other.socket;
 
 import com.alibaba.fastjson.JSONObject;
-import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import com.corundumstudio.socketio.protocol.Packet;
-import com.corundumstudio.socketio.protocol.PacketType;
 import com.jeesite.modules.entity.EPCTag;
 import com.jeesite.modules.other.utils.ReaderUtil;
 import com.jeesite.modules.service.ArchivesService;
+import com.jeesite.modules.service.WarehouseService;
 import io.socket.client.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * 消息事件处理器
@@ -35,6 +34,11 @@ public class MessageEventHandler {
     @Resource
     private ArchivesService archivesService;
 
+    @Resource
+    private WarehouseService warehouseService;
+
+    private volatile boolean flag = true;
+
     private static final Logger logger = LoggerFactory.getLogger(MessageEventHandler.class);
 
     @Autowired
@@ -46,10 +50,11 @@ public class MessageEventHandler {
     @OnConnect
     public void onConnect(SocketIOClient client) {
         if (client != null) {
-            String applicationId = client.getHandshakeData().getSingleUrlParam("appid");
-            logger.info("连接成功, applicationId=" + applicationId + ", sessionId=" + client.getSessionId().toString());
-            client.joinRoom(applicationId);
-
+            String warehouseId = client.getHandshakeData().getSingleUrlParam("warehouseId");
+            logger.info("连接成功, warehouseId=" + warehouseId + ", sessionId=" + client.getSessionId().toString());
+            client.joinRoom(warehouseId);
+            Set<String> allRooms = client.getAllRooms();
+            logger.info(allRooms.toString());
         } else {
             logger.error("客户端为空");
         }
@@ -58,8 +63,8 @@ public class MessageEventHandler {
     //添加@OnDisconnect事件，客户端断开连接时调用，刷新客户端信息
     @OnDisconnect
     public void onDisconnect(SocketIOClient client) {
-        String applicationId = client.getHandshakeData().getSingleUrlParam("appid");
-        logger.info("客户端断开连接, applicationId=" + applicationId + ", sessionId=" + client.getSessionId().toString());
+        String warehouseId = client.getHandshakeData().getSingleUrlParam("warehouseId");
+        logger.info("客户端断开连接, warehouseId=" + warehouseId + ", sessionId=" + client.getSessionId().toString());
         client.disconnect();
     }
 
@@ -82,6 +87,9 @@ public class MessageEventHandler {
                 jsonObject.put("tags", t.sets);
             } else {
                 ReaderUtil.readers.remove(key);
+                if (flag) {
+                    restartReader(key);
+                }
             }
             ackRequest.sendAckData(jsonObject);
         }
@@ -106,6 +114,15 @@ public class MessageEventHandler {
     @OnEvent(value = "doReport")
     public void onDoReport(SocketIOClient client, AckRequest ackRequest, ReportParam param) {
 
+    }
+
+
+    public void restartReader(String warehouseId) {
+        flag = false;
+        new Thread(() -> {
+            ReaderUtil.restart(warehouseService.get(warehouseId));
+            flag = true;
+        }).start();
     }
 
 }
