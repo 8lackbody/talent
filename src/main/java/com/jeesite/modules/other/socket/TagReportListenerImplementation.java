@@ -11,9 +11,6 @@ import com.jeesite.modules.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -31,8 +28,6 @@ public class TagReportListenerImplementation implements TagReportListener {
     private boolean isNewRecord = true;
 
     private RecordService recordService = SpringContextHolder.getBean(RecordService.class);
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 
     Timer timer = new Timer();
 
@@ -62,11 +57,9 @@ public class TagReportListenerImplementation implements TagReportListener {
             //TODO alert 状态也需要查询出来 在发送的时候查  不在这里
             EPCTag epcTag;
             if (epc.replace(" ", "").equals("666645000004")) {
-                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm"))
-                        , epc, "", "未确认", 1);
+                epcTag = new EPCTag(new Date(), epc, "", "未确认", 1);
             } else {
-                epcTag = new EPCTag(LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm"))
-                        , epc, "", "未确认", 0);
+                epcTag = new EPCTag(new Date(), epc, "", "未确认", 0);
             }
             sets.add(epcTag);
         }
@@ -84,7 +77,7 @@ public class TagReportListenerImplementation implements TagReportListener {
                 record.setWarehouseId(warehouseId);
                 record.setName(epcTag.getName());
                 record.setConfirmStatus(1);
-                record.setRecordTime(simpleDateFormat.parse(epcTag.getDate()));
+                record.setRecordTime(epcTag.getDate());
                 record.setAlarmStatus(epcTag.getAlert());
                 list.add(record);
             }

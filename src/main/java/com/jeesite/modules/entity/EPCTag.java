@@ -2,12 +2,13 @@ package com.jeesite.modules.entity;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Data
 public class EPCTag {
 
-    private String date;
+    private Date date;
 
     private String epc;
 
@@ -17,7 +18,7 @@ public class EPCTag {
 
     private Integer alert;
 
-    public EPCTag(String date, String epc, String name, String status, Integer alert) {
+    public EPCTag(Date date, String epc, String name, String status, Integer alert) {
         this.date = date;
         this.epc = epc;
         this.name = name;

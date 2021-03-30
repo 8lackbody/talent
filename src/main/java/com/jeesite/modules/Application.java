@@ -22,7 +22,7 @@ import org.springframework.context.ApplicationContext;
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        ApplicationContext run = SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
         ReaderUtil.startAllReader();
     }
 

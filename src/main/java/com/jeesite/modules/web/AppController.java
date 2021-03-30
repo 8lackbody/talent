@@ -47,16 +47,19 @@ public class AppController {
             //判断传入的参数不能为空且做ip地址正则校验
             if (androidIp != null && androidIp.matches(check)) {
                 warehouse = warehouseService.findByReaderIp(androidIp);
+                if (warehouse != null) {
+                    return ResultVo.ok().put(warehouse);
+                } else {
+                    return ResultVo.fail(ResultCode.ERROR).put("没有对应仓库");
+                }
             } else {
                 //失败返回校验数据错误
-                return ResultVo.fail(ResultCode.PARAMETER);
+                return ResultVo.fail(ResultCode.PARAMETER).put("入参有误");
             }
         } catch (Exception e) {
             //500报错返回
             return ResultVo.fail(ResultCode.ERROR).put(e.getMessage());
         }
-        //成功返回
-        return ResultVo.ok().put(warehouse);
     }
 
     /**
