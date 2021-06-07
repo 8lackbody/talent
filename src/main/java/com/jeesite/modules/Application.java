@@ -3,13 +3,12 @@
  */
 package com.jeesite.modules;
 
-import com.jeesite.modules.other.utils.ReaderUtil;
+import com.jeesite.modules.utils.ReaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ApplicationContext;
 
 /**
  * Application
