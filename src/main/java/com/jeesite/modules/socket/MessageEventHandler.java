@@ -80,6 +80,7 @@ public class MessageEventHandler {
             if (readerStatus) {
                 TagReader tagReader = ReaderUtil.readers.get(key);
                 TagReportListenerImplementation t = tagReader.getTagReportListener();
+                // TODO 这里需要请求，可以批量请求
                 for (EPCTag epcTag : t.sets) {
                     epcTag.setName(archivesService.getNameByEpc(epcTag.getEpc()));
                 }
@@ -102,19 +103,6 @@ public class MessageEventHandler {
         String room = client.getHandshakeData().getSingleUrlParam("appid");
         server.getRoomOperations(room).sendEvent("broadcast", "广播啦啦啦啦");
     }
-
-    /**
-     * 报告地址接口
-     *
-     * @param client     客户端
-     * @param ackRequest 回执消息
-     * @param param      报告地址参数
-     */
-    @OnEvent(value = "doReport")
-    public void onDoReport(SocketIOClient client, AckRequest ackRequest, ReportParam param) {
-
-    }
-
 
     public void restartReader(String warehouseId) {
         flag = false;

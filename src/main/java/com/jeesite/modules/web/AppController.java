@@ -79,6 +79,4 @@ public class AppController {
         return ResultVo.ok().put(null);
     }
 
-
-
 }

@@ -26,6 +26,13 @@ public class EPCTag {
         this.alert = alert;
     }
 
+    public EPCTag(String epc) {
+        this.date = new Date();
+        this.epc = epc;
+        this.status = "未确认";
+        this.alert = 0;
+    }
+
     public EPCTag() {
     }
 

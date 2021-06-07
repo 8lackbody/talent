@@ -52,9 +52,7 @@ public class TagReportListenerImplementation implements TagReportListener {
                     }
                 }, 60000);
             }
-            //从数据库里查出来epc的名字
-            String epc = t.getEpc().toString();
-            sets.add(new EPCTag(new Date(), epc, "", "未确认", 0));
+            sets.add(new EPCTag(t.getEpc().toString()));
         }
     }
 
