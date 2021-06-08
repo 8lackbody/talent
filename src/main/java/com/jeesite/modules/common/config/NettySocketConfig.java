@@ -15,7 +15,7 @@ public class NettySocketConfig {
          */
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
         // 设置主机名，默认是0.0.0.0
-        config.setHostname("192.168.0.112");
+        config.setHostname("172.29.12.118");
         // 设置监听端口
         config.setPort(9999);
         // 协议升级超时时间（毫秒），默认10000。HTTP握手升级为ws协议超时时间

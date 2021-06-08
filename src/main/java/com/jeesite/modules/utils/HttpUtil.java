@@ -1,5 +1,6 @@
 package com.jeesite.modules.utils;
 
+import com.jeesite.modules.web.AppController;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,6 +14,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +32,7 @@ import java.util.Map;
  */
 public class HttpUtil {
 
+    private final static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     /**
      * get请求
@@ -101,11 +105,11 @@ public class HttpUtil {
                 return sb.toString();
             } else {    //
                 System.out.println("状态码：" + code);
+                logger.error(String.valueOf(code));
                 return null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
-
+            logger.error(e.getMessage());
             return null;
         }
     }
