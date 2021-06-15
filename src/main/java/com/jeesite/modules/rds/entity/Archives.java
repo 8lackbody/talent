@@ -49,8 +49,8 @@ public class Archives extends DataEntity<Archives> {
         this.archivesId = archivesId;
     }
 
-    @NotBlank(message = "电子标签号不能为空")
-    @Length(min = 0, max = 20, message = "电子标签号长度不能超过 20 个字符")
+    @NotBlank(message = "标签号不能为空")
+    @Length(min = 0, max = 20, message = "标签号长度不能超过 20 个字符")
     public String getEpc() {
         return epc;
     }

@@ -70,8 +70,8 @@ public class Warehouse extends DataEntity<Warehouse> {
 		this.readerIp = readerIp;
 	}
 	
-	@NotBlank(message="仓库名字不能为空")
-	@Length(min=0, max=20, message="仓库名字长度不能超过 20 个字符")
+	@NotBlank(message="库房名字不能为空")
+	@Length(min=0, max=20, message="库房名字长度不能超过 20 个字符")
 	public String getWarehouseName() {
 		return warehouseName;
 	}

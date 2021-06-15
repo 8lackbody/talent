@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('仓库名')}：</label>
+					<label class="control-label">${text('库房名')}：</label>
 					<div class="control-inline width-120">
 						<#form:select class="form-control" path="warehouseId" dictType="warehouse_name" blankOption="true" />
 					</div>
@@ -92,7 +92,7 @@ $('#dataGrid').dataGrid({
 		{header:'${text("检测时间")}', name:'recordTime', index:'a.record_time', width:150, align:"center", frozen:true},
 		{header:'${text("标签号")}', name:'epc', index:'a.epc', width:150, align:"center"},
 		{header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
-		{header:'${text("仓库名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function (val, obj, row, act) {
+		{header:'${text("库房名")}', name:'warehouseId', index:'a.warehouse_id', width:150, align:"center", formatter: function (val, obj, row, act) {
 				return js.getDictLabel(${@DictUtils.getDictListJson('warehouse_name')}, val, '${text("未知")}', true);
 		}},
 		{header:'${text("确认状态")}', name:'confirmStatus', index:'a.confirm_status', width:150, align:"center", formatter: function (val, obj, row, act) {

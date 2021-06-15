@@ -51,7 +51,7 @@ $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
 		{header:'${text("Reader IP")}', name:'readerIp', index:'a.reader_ip', width:150, align:"center", frozen:true},
-		{header:'${text("仓库名字")}', name:'warehouseName', index:'a.warehouse_name', width:150, align:"center"},
+		{header:'${text("库房名字")}', name:'warehouseName', index:'a.warehouse_name', width:150, align:"center"},
 		{header:'${text("机构名称")}', name:'mechanismName', index:'a.mechanism_name', width:150, align:"center"},
 		{header:'${text("天线一开关")}', name:'antenna1Enable', index:'a.antenna1_enable', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('sys_yes_no')}, val, '${text("未知")}', true);

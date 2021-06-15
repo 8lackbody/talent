@@ -68,8 +68,8 @@ public class Record extends DataEntity<Record> {
         this.recordTime = recordTime;
     }
 
-    @NotBlank(message="检测到的标签号不能为空")
-    @Length(min=0, max=255, message="检测到的标签号长度不能超过 255 个字符")
+    @NotBlank(message="标签号不能为空")
+    @Length(min=0, max=255, message="标签号长度不能超过 255 个字符")
     public String getEpc() {
         return epc;
     }
@@ -87,8 +87,7 @@ public class Record extends DataEntity<Record> {
         this.name = name;
     }
 
-    @NotBlank(message="哪个仓库上传的不能为空")
-    @Length(min=0, max=11, message="哪个仓库上传的长度不能超过 11 个字符")
+    @NotBlank(message="库房不能为空")
     public String getWarehouseId() {
         return warehouseId;
     }
@@ -106,7 +105,7 @@ public class Record extends DataEntity<Record> {
         this.confirmStatus = confirmStatus;
     }
 
-    @NotNull(message="alarm_status不能为空")
+    @NotNull(message="警报状态不能为空")
     public Integer getAlarmStatus() {
         return alarmStatus;
     }
