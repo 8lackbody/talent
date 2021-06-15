@@ -58,7 +58,7 @@
                     var actions = [];
                 <% if(hasPermi('archives:archives:edit')){ %>
                         actions.push('<a href="${ctx}/archives/archives/form?archivesId='+row.archivesId+'" class="btnList" title="${text("编辑标签档案")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-                        actions.push('<a href="${ctx}/archives/archives/delete?archivesId='+row.archivesId+'" class="btnList" title="${text("删除标签档案")}" data-confirm="${text("确认要删除该archives吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+                        actions.push('<a href="${ctx}/archives/archives/delete?archivesId='+row.archivesId+'" class="btnList" title="${text("删除标签档案")}" data-confirm="${text("确认要删除该档案吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
                     <% } %>
                     return actions.join('');
                 }}

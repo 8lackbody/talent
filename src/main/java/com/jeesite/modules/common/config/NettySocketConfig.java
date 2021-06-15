@@ -5,6 +5,9 @@ import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @Configuration
 public class NettySocketConfig {
 
@@ -14,8 +17,12 @@ public class NettySocketConfig {
          * 创建Socket，并设置监听端口
          */
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
+        try {
+            config.setHostname(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         // 设置主机名，默认是0.0.0.0
-        config.setHostname("172.29.12.118");
         // 设置监听端口
         config.setPort(9999);
         // 协议升级超时时间（毫秒），默认10000。HTTP握手升级为ws协议超时时间

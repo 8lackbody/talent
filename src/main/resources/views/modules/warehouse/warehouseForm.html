@@ -1,9 +1,9 @@
-<% layout('/layouts/default.html', {title: '仓库天线管理', libs: ['validate']}){ %>
+<% layout('/layouts/default.html', {title: '设备管理', libs: ['validate']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
 			<div class="box-title">
-				<i class="fa icon-note"></i> ${text(warehouse.isNewRecord ? '新增仓库天线' : '编辑仓库天线')}
+				<i class="fa icon-note"></i> ${text(warehouse.isNewRecord ? '新增设备' : '编辑设备')}
 			</div>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -26,7 +26,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label col-sm-4" title="">
-								<span class="required ">*</span> ${text('仓库名字')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('库房名称')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-8">
 								<#form:input path="warehouseName" maxlength="20" class="form-control required"/>
 							</div>

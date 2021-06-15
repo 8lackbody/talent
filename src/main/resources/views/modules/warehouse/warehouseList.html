@@ -1,14 +1,14 @@
-<% layout('/layouts/default.html', {title: '仓库天线管理', libs: ['dataGrid']}){ %>
+<% layout('/layouts/default.html', {title: '设备管理', libs: ['dataGrid']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('仓库天线管理')}
+				<i class="fa icon-notebook"></i> ${text('设备管理')}
 			</div>
 			<div class="box-tools pull-right">
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('warehouse:warehouse:edit')){ %>
-					<a href="${ctx}/warehouse/warehouse/form" class="btn btn-default btnTool" title="${text('新增warehouse')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+					<a href="${ctx}/warehouse/warehouse/form" class="btn btn-default btnTool" title="${text('新增设备')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
 				<% } %>
 				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
 			</div>
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('仓库名字')}：</label>
+					<label class="control-label">${text('库房名称')}：</label>
 					<div class="control-inline">
 						<#form:input path="warehouseName" maxlength="20" class="form-control width-120"/>
 					</div>
@@ -68,8 +68,8 @@ $('#dataGrid').dataGrid({
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('warehouse:warehouse:edit')){ %>
-				actions.push('<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" title="${text("编辑仓库天线")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除仓库天线")}" data-confirm="${text("确认要删除该warehouse吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/warehouse/warehouse/form?warehouseId='+row.warehouseId+'" class="btnList" title="${text("编辑设备")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/warehouse/warehouse/delete?warehouseId='+row.warehouseId+'" class="btnList" title="${text("删除设备")}" data-confirm="${text("确认要删除该设备吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}
