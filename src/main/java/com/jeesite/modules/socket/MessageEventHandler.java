@@ -39,7 +39,10 @@ public class MessageEventHandler {
     @Resource
     private WarehouseService warehouseService;
 
-    private volatile boolean flag = true;
+    private volatile boolean resetReaderFlag = true;
+
+    private volatile boolean getNamePostFlag = true;
+
 
     @Autowired
     public MessageEventHandler(SocketIOServer server) {
@@ -81,11 +84,18 @@ public class MessageEventHandler {
                 TagReader tagReader = ReaderUtil.readers.get(key);
                 TagReportListenerImplementation t = tagReader.getTagReportListener();
                 // 请求接口获取 名字和状态
-                Set<EPCTag> result = getNameAndActivity(t.sets);
+
+                Set<EPCTag> result = t.sets;
+
+                //判断上次请求是否成功
+                if (getNamePostFlag) {
+                    result = getNameAndActivity(t.sets);
+                }
+
                 jsonObject.put("tags", result);
             } else {
                 ReaderUtil.readers.remove(key);
-                if (flag) {
+                if (resetReaderFlag) {
                     restartReader(key);
                 }
             }
@@ -103,10 +113,10 @@ public class MessageEventHandler {
     }
 
     public void restartReader(String warehouseId) {
-        flag = false;
+        resetReaderFlag = false;
         new Thread(() -> {
             ReaderUtil.restart(warehouseService.get(warehouseId));
-            flag = true;
+            resetReaderFlag = true;
         }).start();
     }
 
@@ -135,11 +145,13 @@ public class MessageEventHandler {
             filePersonNameOrDetailPayload = JSONObject.parseObject(response, FilePersonNameOrDetailPayload.class);
         } catch (Exception e) {
             logger.error("接口返回消息序列化错误；" + response);
+            resetGetNamePostFlag();
             return epcTags;
         }
         // 检查返回对象序列化后是否为空
         if (filePersonNameOrDetailPayload == null) {
             logger.error("接口返回消息为空；" + response);
+            resetGetNamePostFlag();
             return epcTags;
         }
         // 检查接口的返回码是否为0
@@ -153,9 +165,10 @@ public class MessageEventHandler {
             logger.error("回数据长度是否和已有的长度不一致；" + filePersonNameOrDetailPayload.getData());
             return epcTags;
         }
+
         Iterator<EPCTag> EPCTagIterator = epcTags.iterator();
         Iterator<Map<String, String>> mapIterator = data.iterator();
-        while (EPCTagIterator.hasNext()){
+        while (EPCTagIterator.hasNext()) {
             EPCTag epcTag = EPCTagIterator.next();
             Map<String, String> payload = mapIterator.next();
             epcTag.setName(String.valueOf(payload.get("NAME")));
@@ -164,5 +177,18 @@ public class MessageEventHandler {
         return epcTags;
     }
 
-
+    /**
+     * 在一次请求接口失败后，先关闭名字请求
+     * 等到三分钟后在请求一次
+     */
+    public void resetGetNamePostFlag() {
+        getNamePostFlag = false;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getNamePostFlag = true;
+            }
+        }, 180000);
+    }
 }

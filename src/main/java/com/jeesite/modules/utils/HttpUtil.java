@@ -3,6 +3,7 @@ package com.jeesite.modules.utils;
 import com.jeesite.modules.web.AppController;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -12,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -73,10 +75,13 @@ public class HttpUtil {
         try {
             // 定义HttpClient  
             HttpClient client = new DefaultHttpClient();
+            // 设置超时时间
+            RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(8000).setConnectTimeout(8000).build();
+
             // 实例化HTTP方法  
             HttpPost request = new HttpPost();
             request.setURI(new URI(url));
-
+            request.setConfig(requestConfig);
             //设置参数
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();
             for (Iterator iter = params.keySet().iterator(); iter.hasNext(); ) {
