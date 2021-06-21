@@ -9,6 +9,7 @@ import com.jeesite.modules.common.payload.FilePersonNameOrDetailPayload;
 import com.jeesite.modules.common.payload.FilePersonNumberPayload;
 import com.jeesite.modules.common.result.ResultCode;
 import com.jeesite.modules.common.result.ResultVo;
+import com.jeesite.modules.rds.entity.Check;
 import com.jeesite.modules.rds.entity.Warehouse;
 import com.jeesite.modules.rds.service.ArchivesService;
 import com.jeesite.modules.rds.service.WarehouseService;
@@ -114,6 +115,20 @@ public class AppController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("lack", icCards);
         jsonObject.put("unknown", foundList);
+
+        Check check = new Check();
+        check.setStartEpc(inventoryCheckForm.getStartEpc());
+        check.setEndEpc(inventoryCheckForm.getEndEpc());
+        check.setCheckData(inventoryCheckForm.getFound().toString());
+        if(!foundList.isEmpty()){
+            check.setCheckStatus(2);
+        }else {
+            if(icCards.isEmpty()){
+                check.setCheckStatus(1);
+            }else {
+                check.setCheckStatus(0);
+            }
+        }
 
         return ResultVo.ok().put(jsonObject);
     }
