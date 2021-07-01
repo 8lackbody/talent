@@ -57,3 +57,9 @@ logging:
 shiro:
   rememberMe:
     secretKey: ~
+
+
+App:
+  phoneVersion: 2.1.0
+  tabletVersion: 2.1.0
+
