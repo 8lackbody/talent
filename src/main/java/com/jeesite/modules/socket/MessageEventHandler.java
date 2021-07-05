@@ -74,7 +74,6 @@ public class MessageEventHandler {
     // 消息接收入口
     @OnEvent(value = Socket.EVENT_MESSAGE)
     public void onEvent(SocketIOClient client, AckRequest ackRequest, Object data) {
-        logger.info("接收到客户端消息" + data);
         if (ackRequest.isAckRequested()) {
             String key = String.valueOf(data);
             boolean readerStatus = ReaderUtil.getReaderStatus(key);
