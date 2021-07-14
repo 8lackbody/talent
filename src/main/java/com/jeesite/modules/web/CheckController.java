@@ -3,9 +3,14 @@
  */
 package com.jeesite.modules.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.jeesite.common.config.Global;
+import com.jeesite.common.entity.Page;
+import com.jeesite.common.lang.DateUtils;
+import com.jeesite.common.utils.excel.ExcelExport;
+import com.jeesite.common.web.BaseController;
+import com.jeesite.modules.rds.entity.Check;
+import com.jeesite.modules.rds.entity.Record;
+import com.jeesite.modules.rds.service.CheckService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +20,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jeesite.common.config.Global;
-import com.jeesite.common.entity.Page;
-import com.jeesite.common.web.BaseController;
-import com.jeesite.modules.rds.entity.Check;
-import com.jeesite.modules.rds.service.CheckService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * checkController
@@ -33,7 +37,7 @@ public class CheckController extends BaseController {
 
 	@Autowired
 	private CheckService checkService;
-	
+
 	/**
 	 * 获取数据
 	 */
@@ -41,7 +45,7 @@ public class CheckController extends BaseController {
 	public Check get(String checkId, boolean isNewRecord) {
 		return checkService.get(checkId, isNewRecord);
 	}
-	
+
 	/**
 	 * 查询列表
 	 */
@@ -51,7 +55,7 @@ public class CheckController extends BaseController {
 		model.addAttribute("check", check);
 		return "modules/check/checkList";
 	}
-	
+
 	/**
 	 * 查询列表数据
 	 */
@@ -84,7 +88,7 @@ public class CheckController extends BaseController {
 		checkService.save(check);
 		return renderResult(Global.TRUE, text("保存check成功！"));
 	}
-	
+
 	/**
 	 * 删除数据
 	 */
@@ -95,5 +99,23 @@ public class CheckController extends BaseController {
 		checkService.delete(check);
 		return renderResult(Global.TRUE, text("删除check成功！"));
 	}
-	
+
+	@RequestMapping(value = "checkExport")
+	@ResponseBody
+	public boolean checkExport(Check check) {
+		List<Check> list = checkService.findList(check);
+		if (list.size() > 2000) {
+			return false;
+		}
+		return true;
+	}
+
+	@RequestMapping(value = "export")
+	@ResponseBody
+	public void exportFile(Check check, HttpServletRequest request, HttpServletResponse response) {
+		String fileName = DateUtils.getDate("yyyy-MM-dd") + "盘库记录" + ".xlsx";
+		List<Check> list = checkService.findList(check);
+		new ExcelExport("盘库记录", Check.class).setDataList(list).write(response, fileName).close();
+	}
+
 }

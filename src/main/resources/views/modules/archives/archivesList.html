@@ -1,73 +1,73 @@
 <% layout('/layouts/default.html', {title: '标签档案管理', libs: ['dataGrid']}){ %>
 <div class="main-content">
-    <div class="box box-main">
-        <div class="box-header">
-            <div class="box-title">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
                 <i class="fa icon-notebook"></i> ${text('标签档案管理')}
-            </div>
-            <div class="box-tools pull-right">
+			</div>
+			<div class="box-tools pull-right">
                 <!-- <a href="../../static/test.xls" download="test1.xls">下载Excel模版</a> -->
                 <input id="articleImageFile" name="excelFile" type="file" class="btn btn-default"
                        style="width: 300px; height: 30px; display: inline;"/>
                 <input class="btn btn-success" id="saveZipButton" type="button" value="上传"/>
                 <a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i>
                     ${text('查询')}</a>
-                <% if(hasPermi('archives:archives:edit')){ %>
+				<% if(hasPermi('archives:archives:edit')){ %>
                 <a href="${ctx}/archives/archives/form" class="btn btn-default btnTool" title="${text('新增标签档案')}"><i
                         class="fa fa-plus"></i> ${text('新增')}</a>
-                <% } %>
-                <a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
-            </div>
-        </div>
-        <div class="box-body">
-            <#form:form id="searchForm" model="${archives}" action="${ctx}/archives/archives/listData" method="post" class="form-inline hide"
-            data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
-            <div class="form-group">
-                <label class="control-label">${text('电子标签号')}：</label>
-                <div class="control-inline">
-                    <#form:input path="epc" maxlength="20" class="form-control width-120"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">${text('姓名')}：</label>
-                <div class="control-inline">
-                    <#form:input path="name" maxlength="20" class="form-control width-120"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
-                <button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
-            </div>
-        </#form:form>
-        <table id="dataGrid"></table>
-        <div id="dataGridPage"></div>
-    </div>
-</div>
+				<% } %>
+				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${archives}" action="${ctx}/archives/archives/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('电子标签号')}：</label>
+					<div class="control-inline">
+						<#form:input path="epc" maxlength="20" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('姓名')}：</label>
+					<div class="control-inline">
+						<#form:input path="name" maxlength="20" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
 </div>
 <% } %>
 <script>
-    // 初始化DataGrid对象
-    $('#dataGrid').dataGrid({
-        searchForm: $("#searchForm"),
-        columnModel: [
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
             {header:'${text("电子标签号")}', name:'epc', index:'a.epc', width:150, align:"center", frozen:true},
             {header:'${text("姓名")}', name:'name', index:'a.name', width:150, align:"center"},
             {header:'${text("身份证号")}', name:'cardId', index:'a.card_id', width:150, align:"center"},
             {header:'${text("备注")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
-            {header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
-                    var actions = [];
-                <% if(hasPermi('archives:archives:edit')){ %>
+		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('archives:archives:edit')){ %>
                         actions.push('<a href="${ctx}/archives/archives/form?archivesId='+row.archivesId+'" class="btnList" title="${text("编辑标签档案")}"><i class="fa fa-pencil"></i></a>&nbsp;');
                         actions.push('<a href="${ctx}/archives/archives/delete?archivesId='+row.archivesId+'" class="btnList" title="${text("删除标签档案")}" data-confirm="${text("确认要删除该档案吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
-                    <% } %>
-                    return actions.join('');
-                }}
-        ],
-        // 加载成功后执行事件
-        ajaxSuccess: function(data){
-
-        }
-    });
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
 </script>
 <script>
     $("#saveZipButton").on('click', function(){

@@ -1,14 +1,14 @@
-<% layout('/layouts/default.html', {title: '盘库记录管理', libs: ['dataGrid']}){ %>
+<% layout('/layouts/default.html', {title: 'check管理', libs: ['dataGrid']}){ %>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header">
 			<div class="box-title">
-				<i class="fa icon-notebook"></i> ${text('盘库记录管理')}
+				<i class="fa icon-notebook"></i> ${text('check管理')}
 			</div>
 			<div class="box-tools pull-right">
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('check:check:edit')){ %>
-					<a href="${ctx}/check/check/form" class="btn btn-default btnTool" title="${text('新增记录')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+					<a href="${ctx}/check/check/form" class="btn btn-default btnTool" title="${text('新增check')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
 				<% } %>
 				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
 			</div>
@@ -17,19 +17,19 @@
 			<#form:form id="searchForm" model="${check}" action="${ctx}/check/check/listData" method="post" class="form-inline hide"
 					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
 				<div class="form-group">
-					<label class="control-label">${text('开始标签')}：</label>
+					<label class="control-label">${text('start_epc')}：</label>
 					<div class="control-inline">
 						<#form:input path="startEpc" maxlength="15" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('结束标签')}：</label>
+					<label class="control-label">${text('end_epc')}：</label>
 					<div class="control-inline">
 						<#form:input path="endEpc" maxlength="15" class="form-control width-120"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('盘库时间')}：</label>
+					<label class="control-label">${text('create_dt')}：</label>
 					<div class="control-inline">
 						<#form:input path="createDt_gte" readonly="true" maxlength="20" class="form-control laydate width-datetime"
 							dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm" data-done="createDt_lte.click()"/>
@@ -39,14 +39,21 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">${text('盘库结果')}：</label>
+					<label class="control-label">${text('check_status')}：</label>
 					<div class="control-inline width-120">
 						<#form:select path="checkStatus" dictType="check_status" blankOption="true" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label">${text('remarks')}：</label>
+					<div class="control-inline">
+						<#form:input path="remarks" maxlength="255" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
 					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+					<button onclick="exportCheck()" type="button" class="btn btn-success btn-sm">${text('导出')}</button >
 				</div>
 			</#form:form>
 			<table id="dataGrid"></table>
@@ -56,22 +63,45 @@
 </div>
 <% } %>
 <script>
+
+	function exportCheck() {
+		js.confirm('确认导出当前查询数据？', function(){
+			const form = $("#searchForm").serialize();
+			js.ajaxSubmit("${ctx}/record/record/checkExport?"+form, function(data){
+				if(data === true){
+					js.showMessage("导出成功，等待下载");
+					window.location.replace("${ctx}/record/record/export?"+form);
+				}else {
+					js.showErrorMessage("导出失败，数据量过大");
+				}
+			});
+		});
+	}
+
+</script>
+
+<script>
 // 初始化DataGrid对象
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("开始标签")}', name:'startEpc', index:'a.start_epc', width:150, align:"center"},
-		{header:'${text("结束标签")}', name:'endEpc', index:'a.end_epc', width:150, align:"center"},
-		{header:'${text("盘库时间")}', name:'createDt', index:'a.create_dt', width:150, align:"center"},
-		{header:'${text("盘库数据")}', name:'checkData', index:'a.check_data', width:150, align:"left"},
-		{header:'${text("盘库结果")}', name:'checkStatus', index:'a.check_status', width:150, align:"center", formatter: function(val, obj, row, act){
+		{header:'${text("start_epc")}', name:'startEpc', index:'a.start_epc', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/check/check/form?checkId='+row.checkId+'" class="btnList" data-title="${text("编辑check")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("end_epc")}', name:'endEpc', index:'a.end_epc', width:150, align:"left"},
+		{header:'${text("create_dt")}', name:'createDt', index:'a.create_dt', width:150, align:"center"},
+		{header:'${text("check_data")}', name:'checkData', index:'a.check_data', width:150, align:"left"},
+		{header:'${text("unknown_data")}', name:'unknownData', index:'a.unknown_data', width:150, align:"left"},
+		{header:'${text("check_status")}', name:'checkStatus', index:'a.check_status', width:150, align:"center", formatter: function(val, obj, row, act){
 			return js.getDictLabel(${@DictUtils.getDictListJson('check_status')}, val, '${text("未知")}', true);
 		}},
+		{header:'${text("lack_data")}', name:'lackData', index:'a.lack_data', width:150, align:"left"},
+		{header:'${text("remarks")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
 			<% if(hasPermi('check:check:edit')){ %>
-				actions.push('<a href="${ctx}/check/check/form?checkId='+row.checkId+'" class="btnList" title="${text("编辑记录")}"><i class="fa fa-pencil"></i></a>&nbsp;');
-				actions.push('<a href="${ctx}/check/check/delete?checkId='+row.checkId+'" class="btnList" title="${text("删除记录")}" data-confirm="${text("确认要删除该记录吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/check/check/form?checkId='+row.checkId+'" class="btnList" title="${text("编辑check")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/check/check/delete?checkId='+row.checkId+'" class="btnList" title="${text("删除check")}" data-confirm="${text("确认要删除该check吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
 			<% } %>
 			return actions.join('');
 		}}

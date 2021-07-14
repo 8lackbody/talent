@@ -1,7 +1,9 @@
 package com.jeesite.modules.web;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
 import com.jeesite.modules.common.config.UrlConfig;
 import com.jeesite.modules.common.form.InventoryCheckForm;
 import com.jeesite.modules.common.form.QueryNumberForm;
@@ -128,6 +130,9 @@ public class AppController {
         check.setStartEpc(inventoryCheckForm.getStartEpc());
         check.setEndEpc(inventoryCheckForm.getEndEpc());
         check.setCheckData(inventoryCheckForm.getFound().toString());
+        check.setLackData(JSONArray.toJSONString(icCards));
+        check.setUnknownData(JSONArray.toJSONString(foundList));
+
         if(!foundList.isEmpty()){
             check.setCheckStatus(2);
         }else {

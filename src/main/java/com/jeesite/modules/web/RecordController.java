@@ -5,6 +5,8 @@ package com.jeesite.modules.web;
 
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
+import com.jeesite.common.lang.DateUtils;
+import com.jeesite.common.utils.excel.ExcelExport;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.rds.entity.Record;
 import com.jeesite.modules.rds.service.RecordService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * recordController
@@ -94,6 +97,25 @@ public class RecordController extends BaseController {
     public String delete(Record record) {
         recordService.delete(record);
         return renderResult(Global.TRUE, text("删除记录成功！"));
+    }
+
+
+    @RequestMapping(value = "checkExport")
+    @ResponseBody
+    public boolean checkExport(Record record) {
+        List<Record> list = recordService.findList(record);
+        if (list.size() > 2000) {
+            return false;
+        }
+        return true;
+    }
+
+    @RequestMapping(value = "export")
+    @ResponseBody
+    public void exportFile(Record record, HttpServletRequest request, HttpServletResponse response) {
+        String fileName = DateUtils.getDate("yyyy-MM-dd") + "扫描记录" + ".xlsx";
+        List<Record> list = recordService.findList(record);
+        new ExcelExport("扫描记录", Record.class).setDataList(list).write(response, fileName).close();
     }
 
 }

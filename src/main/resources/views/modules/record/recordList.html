@@ -6,7 +6,6 @@
 				<i class="fa icon-notebook"></i> ${text('记录管理')}
 			</div>
 			<div class="box-tools pull-right">
-				<a href="#" class="btn btn-success" id="btnExport" title="${text('导出')}"><i class="fa"></i> ${text('导出')}</a>
 				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
 				<% if(hasPermi('record:record:edit')){ %>
 					<a href="${ctx}/record/record/form" class="btn btn-default btnTool" title="${text('新增记录')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
@@ -54,6 +53,7 @@
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
 					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+					<button onclick="exportRecord()" type="button" class="btn btn-success btn-sm">${text('导出')}</button >
 				</div>
 			</#form:form>
 			<table id="dataGrid"></table>
@@ -62,28 +62,25 @@
 	</div>
 </div>
 <% } %>
-<script type="text/javascript" src="${ctxStatic}/jquery.table2excel.js"></script>
-<script type="text/javascript">
-    $("#btnExport").click(function(){
-		var myDate = new Date;
-        var year = myDate.getFullYear(); //获取当前年
-        var mon = myDate.getMonth() + 1; //获取当前月
-        var date = myDate.getDate(); //获取当前日
-        var week = myDate.getDay();
-        var h = myDate.getHours();//获取当前小时数(0-23)
-        var m = myDate.getMinutes();//获取当前分钟数(0-59)
-        var s = myDate.getSeconds();//获取当前秒
-        var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-        $("#dataGrid").table2excel({
-            exclude: ".noExl",
-            name: "Excel Document Name",
-            filename: year + "年" + mon + "月" + date + "日 导出记录",
-            exclude_img: true,
-            exclude_links: true,
-            exclude_inputs: true
-        });
-    });
+
+<script>
+
+	function exportRecord() {
+		js.confirm('确认导出当前查询数据？', function() {
+			const form = $("#searchForm").serialize();
+			js.ajaxSubmit("${ctx}/record/record/checkExport?" + form, function (data) {
+				if (data === true) {
+					js.showMessage("导出成功，等待下载");
+					window.location.replace("${ctx}/record/record/export?" + form);
+				} else {
+					js.showErrorMessage("导出失败，数据量过大");
+				}
+			});
+		});
+	}
+
 </script>
+
 <script>
 // 初始化DataGrid对象
 $('#dataGrid').dataGrid({

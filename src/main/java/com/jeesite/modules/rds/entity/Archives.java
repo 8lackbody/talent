@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
  * archivesEntity
  *
  * @author zht
- * @version 2020-12-21
+ * @version 2021-07-13
  */
 @Table(name = "archives", alias = "a", columns = {
         @Column(name = "archives_id", attrName = "archivesId", label = "archives_id", isPK = true),
@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
 public class Archives extends DataEntity<Archives> {
 
     private static final long serialVersionUID = 1L;
-    private String archivesId;        // archives_id
+    private Long archivesId;        // archives_id
     private String epc;        // 电子标签号
     private String name;        // 姓名
     private String cardId;        // 身份证号
@@ -41,16 +41,16 @@ public class Archives extends DataEntity<Archives> {
         super(id);
     }
 
-    public String getArchivesId() {
+    public Long getArchivesId() {
         return archivesId;
     }
 
-    public void setArchivesId(String archivesId) {
+    public void setArchivesId(Long archivesId) {
         this.archivesId = archivesId;
     }
 
-    @NotBlank(message = "标签号不能为空")
-    @Length(min = 0, max = 20, message = "标签号长度不能超过 20 个字符")
+    @NotBlank(message = "电子标签号不能为空")
+    @Length(min = 0, max = 20, message = "电子标签号长度不能超过 20 个字符")
     public String getEpc() {
         return epc;
     }

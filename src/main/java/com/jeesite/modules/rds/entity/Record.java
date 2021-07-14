@@ -8,6 +8,7 @@ import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
 import com.jeesite.common.mybatis.annotation.Table;
 import com.jeesite.common.mybatis.mapper.query.QueryType;
+import com.jeesite.common.utils.excel.annotation.ExcelField;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -50,6 +51,7 @@ public class Record extends DataEntity<Record> {
         super(id);
     }
 
+    @ExcelField(title="ID", sort=1)
     public String getRecordId() {
         return recordId;
     }
@@ -60,6 +62,7 @@ public class Record extends DataEntity<Record> {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message="检测时间不能为空")
+    @ExcelField(title="检测时间", sort=10)
     public Date getRecordTime() {
         return recordTime;
     }
@@ -70,6 +73,7 @@ public class Record extends DataEntity<Record> {
 
     @NotBlank(message="标签号不能为空")
     @Length(min=0, max=255, message="标签号长度不能超过 255 个字符")
+    @ExcelField(title="检测标签", sort=20)
     public String getEpc() {
         return epc;
     }
@@ -79,6 +83,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @Length(min=0, max=20, message="姓名长度不能超过 20 个字符")
+    @ExcelField(title="姓名", sort=30)
     public String getName() {
         return name;
     }
@@ -88,6 +93,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @NotBlank(message="库房不能为空")
+    @ExcelField(title="库房", sort=40, dictType = "warehouse_name")
     public String getWarehouseId() {
         return warehouseId;
     }
@@ -97,6 +103,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @NotNull(message="确认状态不能为空")
+    @ExcelField(title="确认状态", sort=50)
     public Integer getConfirmStatus() {
         return confirmStatus;
     }
@@ -106,6 +113,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @NotNull(message="警报状态不能为空")
+    @ExcelField(title="警报状态", sort=60, dictType = "talarm_status")
     public Integer getAlarmStatus() {
         return alarmStatus;
     }
