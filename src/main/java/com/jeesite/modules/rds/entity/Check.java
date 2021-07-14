@@ -44,7 +44,7 @@ public class Check extends DataEntity<Check> {
 	private String remarks;
 
 	@Override
-	@ExcelField(title="开始标签", sort=60)
+	@ExcelField(title="备注", sort=60)
 	public String getRemarks() {
 		return remarks;
 	}
