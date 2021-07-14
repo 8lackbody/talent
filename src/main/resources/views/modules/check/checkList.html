@@ -67,10 +67,10 @@
 	function exportCheck() {
 		js.confirm('确认导出当前查询数据？', function(){
 			const form = $("#searchForm").serialize();
-			js.ajaxSubmit("${ctx}/record/record/checkExport?"+form, function(data){
+			js.ajaxSubmit("${ctx}/check/check/checkExport?"+form, function(data){
 				if(data === true){
 					js.showMessage("导出成功，等待下载");
-					window.location.replace("${ctx}/record/record/export?"+form);
+					window.location.replace("${ctx}/check/check/export?"+form);
 				}else {
 					js.showErrorMessage("导出失败，数据量过大");
 				}
