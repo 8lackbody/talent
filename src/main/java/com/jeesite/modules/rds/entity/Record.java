@@ -51,7 +51,6 @@ public class Record extends DataEntity<Record> {
         super(id);
     }
 
-    @ExcelField(title="ID", sort=1)
     public String getRecordId() {
         return recordId;
     }
@@ -113,7 +112,7 @@ public class Record extends DataEntity<Record> {
     }
 
     @NotNull(message="警报状态不能为空")
-    @ExcelField(title="警报状态", sort=60, dictType = "talarm_status")
+    @ExcelField(title="警报值", sort=60, dictType = "alarm_status")
     public Integer getAlarmStatus() {
         return alarmStatus;
     }
